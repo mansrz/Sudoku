@@ -7,8 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+void MainWindow::crearCuadros(){
+
+}
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
