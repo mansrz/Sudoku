@@ -15,9 +15,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void crearCuadros();
-    
+    void getValor();
+    bool validar();
 private:
     Ui::MainWindow *ui;
+
+public slots:
+    void verificar();
 };
 
 

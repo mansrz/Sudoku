@@ -1,22 +1,31 @@
 
 #include "Cuadro.h"
+#include <QString>
+Cuadro::Cuadro(){
+}
 
 Cuadro::Cuadro(int x, int y){
-Cuadro.setX(x);
-Cuadro.setY(y);
+setX(x);
+setY(y);
 }
-Cuadro::setX(int x){
-    Cuadro.posicion_x=x;
+void Cuadro::setX(int x){
+    posicion_x=x;
 }
 
-Cuadro::setY(int y){
-    Cuadro.posicion_y=y;
+void Cuadro::setY(int y){
+    posicion_y=y;
 }
 int Cuadro::getX(){
-    return Cuadro.posicion_x;
+    return posicion_x;
 }
 
 int Cuadro::getY(){
-    return Cuadro.posicion_y;
+     return posicion_y;
 }
 
+int Cuadro::getValor(){
+    return posicion_y;
+}
+void Cuadro::setValor(int y){
+  valor=y;
+}
