@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -38,6 +39,7 @@ public:
     QLineEdit *cuadro_6;
     QLineEdit *cuadro_7;
     QLineEdit *cuadro_8;
+    QLabel *resultado;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -51,7 +53,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(190, 120, 75, 23));
+        pushButton->setGeometry(QRect(210, 170, 75, 23));
         cuadro_0 = new QLineEdit(centralWidget);
         cuadro_0->setObjectName(QStringLiteral("cuadro_0"));
         cuadro_0->setGeometry(QRect(60, 30, 21, 20));
@@ -79,6 +81,9 @@ public:
         cuadro_8 = new QLineEdit(centralWidget);
         cuadro_8->setObjectName(QStringLiteral("cuadro_8"));
         cuadro_8->setGeometry(QRect(100, 70, 21, 20));
+        resultado = new QLabel(centralWidget);
+        resultado->setObjectName(QStringLiteral("resultado"));
+        resultado->setGeometry(QRect(70, 160, 61, 21));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -101,6 +106,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Verificar", 0));
+        resultado->setText(QApplication::translate("MainWindow", "TextLabel", 0));
     } // retranslateUi
 
 };

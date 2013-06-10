@@ -21,8 +21,10 @@ void MainWindow::verificar(){
     if( validar()){
 
 
+        ui->resultado->setText("Válido");
         qDebug()<<"Valido";}else{
         qDebug()<<" No Valido";
+        ui->resultado->setText("No Válido");
     }
 
 }
@@ -41,7 +43,7 @@ bool MainWindow::validar(){
 
     for(int i=0;i<9;i++){
         for(int j=i+1;j<9;j++){
-            if(h[i]==h[j]){
+            if(h[i]==h[j] || h[i]==0 ||h[j]==0){
                 return false;
             }
         }
