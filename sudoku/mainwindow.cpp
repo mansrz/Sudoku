@@ -1,6 +1,9 @@
 #include "mainwindow.h"
-#include <iostream>
 #include "ui_mainwindow.h"
+#include <QApplication>
+#include <QGridLayout>
+#include <QDebug>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,17 +15,23 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    int i,j;
+    for(i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            delete numeros[i+j];
+        }
+    }
 }
 
 
-
-void MainWindow::on_cuadro_textChanged()
+void MainWindow::on_pushButton_clicked()
 {
-
-}
-
-QString MainWindow::on_cuadro_toPlainText(){
-
-    std::cout<<ui->cuadro->toPlainText().toStdString();
-    return ui->cuadro->toPlainText();
+    int i,j;
+    for(i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            numeros[i+j] = new Numero(i+j,1,i,j);
+            ui->gridLayout->addWidget(numeros[i+j],i,j,0);
+        }
+    }
 }

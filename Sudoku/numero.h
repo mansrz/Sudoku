@@ -13,9 +13,9 @@ public:
     ~Numero();
     Numero(int numero, int cuadricula, int columna, int fila);
 
-    
+
 signals:
-    
+
 public slots:
 
 

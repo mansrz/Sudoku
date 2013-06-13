@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2013-06-05T13:48:18
+# Project created by QtCreator 2013-06-13T08:24:25
 #
 #-------------------------------------------------
 
@@ -8,13 +8,15 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = sudoku
+TARGET = Sudoku
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    numero.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    numero.h
 
 FORMS    += mainwindow.ui
