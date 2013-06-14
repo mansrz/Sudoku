@@ -11,8 +11,17 @@ class Numero : public QWidget
 public:
     explicit Numero(QWidget *parent = 0);
     ~Numero();
-    Numero(int numero, int cuadricula, int columna, int fila);
+    Numero(int numero, int columna, int fila);
+    void setFila(int fila);
+       void setColumna(int Columna);
+       void setCuadricula(int fila, int columna);
+       void setValor(int valor);
 
+       int getFila();
+       int getColumna();
+       int getCuadricula();
+       int getValor();
+       void editarLabel(int n);
 
 signals:
 
@@ -25,6 +34,7 @@ private:
     int cuadricula;
     int fila;
     int columna;
+    int valor;
 };
 
 #endif // NUMERO_H
