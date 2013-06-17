@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QGridLayout>
 #include <QDebug>
+#include <QString>
 #include <QVBoxLayout>
 
 
@@ -42,6 +43,19 @@ void MainWindow::on_btnLlenar_clicked()
 
         }
     }
+    texto=new QString();
+
+for(i=0;i<3;i++){
+    for(j=0;j<3;j++){
+        texto->setNum((i*3)+j+1);
+        opcionesNumeros[i+j]=new QPushButton();
+        opcionesNumeros[i+j]->setText(*texto);
+        ui->gridNumeros->addWidget(opcionesNumeros[i+j],i,j,0);
+
+    }
+}
+
+
 
 
 }

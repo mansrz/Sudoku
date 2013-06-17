@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QLabel>
+#include <QString>
 #include "numero.h"
 
 namespace Ui {
@@ -38,6 +39,9 @@ private:
     //QLabel *labelNumber[81];
     Numero *numeros[81];
     QVBoxLayout *gridNumeros [81];
+    QPushButton *opcionesNumeros[8];
+    QString *texto;
+
 
 };
 

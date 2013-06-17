@@ -12,6 +12,7 @@
 #include <QRectF>
 #include <QPointF>
 #include <QLinearGradient>
+#include <QPushButton>
 #include <QGraphicsSceneMouseEvent>
 #include <QMenu>
 #include <QKeyEvent>
