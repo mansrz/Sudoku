@@ -17,6 +17,7 @@ SOURCES += main.cpp\
     numero.cpp
 
 HEADERS  += mainwindow.h \
-    numero.h
+    numero.h \
+    Dimensiones.h
 
 FORMS    += mainwindow.ui

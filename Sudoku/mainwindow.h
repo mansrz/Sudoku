@@ -27,7 +27,7 @@ private slots:
 
     //void on_toolButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_btnLlenar_clicked();
 
 private:
     bool Validarbloque(int IniColumna,int FinColumna,int IniFila,int FinFila);
@@ -37,7 +37,7 @@ private:
     //QPushButton *numberButton[9];
     //QLabel *labelNumber[81];
     Numero *numeros[81];
-
+    QVBoxLayout *gridNumeros [81];
 
 };
 

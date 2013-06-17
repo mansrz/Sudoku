@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>711</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,23 +19,88 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>231</width>
-      <height>201</height>
+      <width>501</width>
+      <height>441</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout"/>
+    <layout class="QGridLayout" name="gridTablero" rowminimumheight="0" columnminimumwidth="0"/>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QGroupBox" name="gbOpciones">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>120</y>
+      <x>530</x>
+      <y>10</y>
+      <width>171</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Opciones</string>
+    </property>
+    <widget class="QCheckBox" name="chkAlerta1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>141</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Alerta jugadas invalidas</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkAlerta2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Alerta jugadas incorrectas</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkAyuda">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ayuda</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkPista">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pista</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="btnLlenar">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>140</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Llenar</string>
     </property>
    </widget>
   </widget>
@@ -44,7 +109,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>711</width>
      <height>21</height>
     </rect>
    </property>

@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QGridLayout>
 #include <QDebug>
+#include <QVBoxLayout>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -17,6 +18,7 @@ MainWindow::~MainWindow()
     delete ui;
 
     int i,j;
+    //delete numeros[0];
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             delete numeros[i+j];
@@ -25,15 +27,23 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_btnLlenar_clicked()
 {
     int i,j;
+
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             numeros[i+j] = new Numero(i+j,i,j);
-            ui->gridLayout->addWidget(numeros[i+j],i,j,0);
+            gridNumeros[i+j] = new QVBoxLayout();
+            gridNumeros[i+j]->addWidget(numeros[i+j]->textOpciones);
+            gridNumeros[i+j]->addWidget(numeros[i+j]->labelNumber);
+            ui->gridTablero->addLayout(gridNumeros[i+j],i,j,0);
+          //  ui->gridTablero->addLayout(numeros[i+j]->caja,i,j,0);
+
         }
     }
+
+
 }
 
 
