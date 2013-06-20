@@ -14,15 +14,17 @@ Numero::Numero(int valor, int fila, int columna){
     this->columna = columna;
     setCuadricula(fila, columna);
     textOpciones=new QTextEdit();
-    labelNumber=new QLabel("0");
+    //labelNumber=new QLabel("0");
+    boton=new QPushButton("0");
     //caja = new QVBoxLayout(textOpciones);
     //caja->addWidget(labelNumber);
 
 }
 
-void Numero::editarLabel(int n){
+void Numero::editarBoton(int n){
     setValor(n);
-    labelNumber->setText(n+"");
+    numero=new QString(n);
+    boton->setText(*numero);
 
 }
 

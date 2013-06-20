@@ -5,7 +5,9 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QVBoxLayout>
+#include <QPushButton>
 #include <QObject>
+#include <QString>
 #include <QGraphicsItem>
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
@@ -37,10 +39,12 @@ public:
     int getCuadricula(void) const { return cuadricula; }
     int getValor(void) const { return valor; }
 
-    void editarLabel(int n);
+    void editarBoton(int n);
     //QVBoxLayout *caja;
     QLabel *labelNumber;
     QTextEdit *textOpciones;
+    QPushButton *boton;
+    QString *numero;
     //QRectF boundingRect() const;
 
 signals:

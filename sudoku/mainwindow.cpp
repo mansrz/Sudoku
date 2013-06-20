@@ -11,7 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+
 }
 
 MainWindow::~MainWindow()
@@ -27,17 +29,32 @@ MainWindow::~MainWindow()
     }
 }
 
+void MainWindow::atrapar_numero(QPushButton *opcion){
+   numero_opcion= opcion->text().toInt();
+}
+
+void MainWindow::cambiar_numero(QPushButton *boton_tablero){
+    if(numero_opcion!=0){
+       tex=new QString(numero_opcion);
+    boton_tablero->setText(*tex);
+    numero_opcion=0;
+    }
+}
 
 void MainWindow::on_btnLlenar_clicked()
 {
-    int i,j;
-
+    int i,j, k;
+    numero=new QString();
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             numeros[i+j] = new Numero(i+j,i,j);
+            numero->setNum(0);
             gridNumeros[i+j] = new QVBoxLayout();
             gridNumeros[i+j]->addWidget(numeros[i+j]->textOpciones);
-            gridNumeros[i+j]->addWidget(numeros[i+j]->labelNumber);
+            //gridNumeros[i+j]->addWidget(numeros[i+j]->labelNumber);
+            gridNumeros[i+j]->addWidget(numeros[i+j]->boton);
+            numeros[i+j]->boton->setText(*numero);
+            QObject::connect(numeros[i+j]->boton,SIGNAL(clicked()),SLOT());
             ui->gridTablero->addLayout(gridNumeros[i+j],i,j,0);
           //  ui->gridTablero->addLayout(numeros[i+j]->caja,i,j,0);
 
@@ -51,6 +68,7 @@ for(i=0;i<3;i++){
         opcionesNumeros[i+j]=new QPushButton();
         opcionesNumeros[i+j]->setText(*texto);
         ui->gridNumeros->addWidget(opcionesNumeros[i+j],i,j,0);
+        QObject::connect(opcionesNumeros[i+j],SIGNAL(clicked()),SLOT(atrapar_numero(QPushButton )));
 
     }
 }
