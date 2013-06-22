@@ -37,7 +37,7 @@ private:
     bool Validarbloque(int IniColumna,int FinColumna,int IniFila,int FinFila);
          bool SeRepite(int numero, int *arreglo);
           int getCasilla(int columna, int fila);
-          int numero_opcion;
+          int numero_opcion=0;
 
     Ui::MainWindow *ui;
     //QPushButton *numberButton[9];
