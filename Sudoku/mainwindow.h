@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QString>
+#include <QSignalMapper>
 #include "numero.h"
 
 namespace Ui {
@@ -27,9 +28,10 @@ private slots:
 
 
     //void on_toolButton_clicked();
-    void atrapar_numero(QPushButton *opcion);
+    void atrapar_numero(int n);
     void on_btnLlenar_clicked();
-    void cambiar_numero(QPushButton *boton_tablero);
+    void cambiar_numero(int n);
+    void boton_avisar(int posicion);
 
 private:
     bool Validarbloque(int IniColumna,int FinColumna,int IniFila,int FinFila);
@@ -41,8 +43,10 @@ private:
     //QPushButton *numberButton[9];
     //QLabel *labelNumber[81];
     QString *tex;
-    Numero *numeros[81];
-    QVBoxLayout *gridNumeros [81];
+    QSignalMapper *signalMapper,*signalMapper1;
+    int posicion;
+    Numero *numeros[80];
+    QVBoxLayout *gridNumeros [80];
     QPushButton *opcionesNumeros[8];
     QString *texto,*numero;
 

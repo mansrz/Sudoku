@@ -12,6 +12,7 @@ Numero::Numero(int valor, int fila, int columna){
     this->valor=valor;
     this->fila = fila;
     this->columna = columna;
+
     setCuadricula(fila, columna);
     textOpciones=new QTextEdit();
     //labelNumber=new QLabel("0");
@@ -23,8 +24,11 @@ Numero::Numero(int valor, int fila, int columna){
 
 void Numero::editarBoton(int n){
     setValor(n);
-    numero=new QString(n);
+    numero=new QString(n+"");
+
+    qDebug()<<n<<numero->at(0);
     boton->setText(*numero);
+    this->repaint();
 
 }
 
