@@ -9,16 +9,18 @@ Numero::~Numero()
 
 
 Numero::Numero(int valor, int fila, int columna){
-    this->valor=valor;
     this->fila = fila;
     this->columna = columna;
-    //QString *numero;
+
     numero = new QString("");
-    numero->setNum(valor);
+    textOpciones=new QLineEdit();
+    boton = new QPushButton ("");
 
     setCuadricula(fila, columna);
-    textOpciones=new QTextEdit();
-    boton=new QPushButton(*numero);
+
+    if (valor!=0){
+        editarBoton(valor);
+    }
 
 }
 

@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QString>
 #include <QSignalMapper>
+#include <QFrame>
+#include <QWidget>
 #include "numero.h"
 
 namespace Ui {
@@ -41,6 +43,12 @@ private:
     int posicion;
     Numero *numeros[80];
     QVBoxLayout *gridNumeros [80];
+
+    QGridLayout *gridCuad[8];
+    QFrame *frameNumero[80];
+    QWidget *widgetCuad[8];
+    QWidget *widgetNumero[80];
+
     QPushButton *opcionesNumeros[8];
     QString *texto;
 

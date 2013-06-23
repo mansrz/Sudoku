@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QDebug>
 #include <QTextEdit>
+#include <QLineEdit>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QObject>
@@ -43,7 +44,7 @@ public:
     void editarBoton(int n);
     //QVBoxLayout *caja;
     QLabel *labelNumber;
-    QTextEdit *textOpciones;
+    QLineEdit *textOpciones;
     QPushButton *boton;
     QString *numero;
     //QRectF boundingRect() const;
