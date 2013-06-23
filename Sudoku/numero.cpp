@@ -31,6 +31,11 @@ void Numero::editarBoton(int n){
 
 }
 
+void Numero::cambiarColorBoton(){
+    boton->setStyleSheet(QStringLiteral("background-color: rgb(229, 0, 141);"));
+
+}
+
 
 void Numero::setCuadricula(int fila, int columna){
     int filadiv,columnadiv;

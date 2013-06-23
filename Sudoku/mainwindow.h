@@ -33,8 +33,6 @@ private slots:
     void cambiarNumero(int n);
 
 private:
-    bool Validarbloque(int IniColumna,int FinColumna,int IniFila,int FinFila);
-    bool SeRepite(int numero, int *arreglo);
     int getCasilla(int columna, int fila);
     int casilla=-1;
 
@@ -44,9 +42,9 @@ private:
     Numero *numeros[80];
     QVBoxLayout *gridNumeros [80];
 
-    QGridLayout *gridCuad[8];
+    QGridLayout *gridCuad[9];
     QFrame *frameNumero[80];
-    QWidget *widgetCuad[8];
+    QWidget *widgetCuad[9];
     QWidget *widgetNumero[80];
 
     QPushButton *opcionesNumeros[8];

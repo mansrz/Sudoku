@@ -42,6 +42,8 @@ public:
     int getValor(void) const { return valor; }
 
     void editarBoton(int n);
+    void cambiarColorBoton();
+
     //QVBoxLayout *caja;
     QLabel *labelNumber;
     QLineEdit *textOpciones;
