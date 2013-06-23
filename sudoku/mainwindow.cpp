@@ -29,80 +29,64 @@ MainWindow::~MainWindow()
     }
 }
 void MainWindow::boton_avisar(int posicion){
-this->posicion=posicion;
-
+    this->posicion=posicion;
+    qDebug()<<posicion;
 }
 
 
-
-void MainWindow::atrapar_numero(int n){
-
-    numero_opcion=n;
-    qDebug()<<numero_opcion;
+void MainWindow::obtenerCasilla(int n){
+    casilla = n;
 }
 
-void MainWindow::cambiar_numero(int n){
-    if(numero_opcion!=0){
-       tex=new QString();
-       tex->setNum(numero_opcion);
-       qDebug()<<tex->toInt();
-        numeros[n]->setValor(numero_opcion);
-       numeros[n]->boton->setText(*tex);
-       //numeros[n]->editarBoton(numero_opcion);
-
-    numero_opcion=0;
+void MainWindow::cambiarNumero(int n){
+    if(casilla!=-1){
+        numeros[casilla]->editarBoton(n);
+        casilla=-1;
     }
 
 }
-
 
 void MainWindow::on_btnLlenar_clicked()
 {
     int i,j;
-     signalMapper1 = new QSignalMapper();
-    numero=new QString();
+    sgnlMprNumero = new QSignalMapper();
+    sgnlMprOpcion = new QSignalMapper();
+    texto=new QString();
+
+
+    //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             qDebug()<<((i*9)+j);
-            numeros[(i*9)+j] = new Numero(0,i*9,j);
-            numero->setNum(0);
+            numeros[(i*9)+j] = new Numero(1,i*9,j);
+
             gridNumeros[(i*9)+j] = new QVBoxLayout();
             gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->textOpciones);
-            //gridNumeros[i+j]->addWidget(numeros[i+j]->labelNumber);
             gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->boton);
-            numeros[(i*9)+j]->boton->setText(*numero);
 
             ui->gridTablero->addLayout(gridNumeros[(i*9)+j],i,j,0);
-            signalMapper1->setMapping(numeros[(i*9)+j]->boton,(i*9)+j);
-                // Conexiones de los button con el signal mapper
-          connect( numeros[((i*9)+j)]->boton, SIGNAL(clicked()), signalMapper1, SLOT(map()));
+            sgnlMprNumero->setMapping(numeros[(i*9)+j]->boton,(i*9)+j);
+            //Juan: Conexiones de los button con el signal mapper
+            connect(numeros[((i*9)+j)]->boton, SIGNAL(clicked()), sgnlMprNumero, SLOT (map()));
 
 
         }
     }
-    connect(signalMapper1, SIGNAL(mapped(int)), SLOT(cambiar_numero(int)));
-    texto=new QString();
-    signalMapper = new QSignalMapper();
-for(i=0;i<3;i++){
-    for(j=0;j<3;j++){
-        texto->setNum((i*3)+j+1);
-        opcionesNumeros[i+j]=new QPushButton();
-        opcionesNumeros[i+j]->setText(*texto);
-        ui->gridNumeros->addWidget(opcionesNumeros[i+j],i,j,0);
+    connect(sgnlMprNumero, SIGNAL (mapped (int)), SLOT (obtenerCasilla(int)));
 
-
-
-        signalMapper->setMapping(opcionesNumeros[i+j],(i*3)+j+1);
-            // Conexiones de los button con el signal mapper
-      connect( opcionesNumeros[i+j], SIGNAL(clicked()), signalMapper, SLOT(map()));
-
-
-
+    //botones opciones 1-9
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++){
+            texto->setNum((i*3)+j+1);
+            opcionesNumeros[i+j]=new QPushButton(*texto);
+            ui->gridNumeros->addWidget(opcionesNumeros[i+j],i,j,0);
+            sgnlMprOpcion->setMapping(opcionesNumeros[i+j],(i*3)+j+1);
+            // Juan: Conexiones de los button con el signal mapper
+            connect( opcionesNumeros[i+j], SIGNAL(clicked()), sgnlMprOpcion, SLOT(map()));
+        }
     }
-}
- // Y conexion del signal mapper con el slot genérico
-connect(signalMapper, SIGNAL(mapped(int)), SLOT(atrapar_numero(int)));
-
+    // Juan: Y conexion del signal mapper con el slot genérico
+    connect(sgnlMprOpcion, SIGNAL(mapped(int)), SLOT(cambiarNumero(int)));
 
 }
 

@@ -55,7 +55,6 @@ public slots:
 
 private:
 
-
     int cuadricula;
     int fila;
     int columna;

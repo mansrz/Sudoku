@@ -12,23 +12,20 @@ Numero::Numero(int valor, int fila, int columna){
     this->valor=valor;
     this->fila = fila;
     this->columna = columna;
+    //QString *numero;
+    numero = new QString("");
+    numero->setNum(valor);
 
     setCuadricula(fila, columna);
     textOpciones=new QTextEdit();
-    //labelNumber=new QLabel("0");
-    boton=new QPushButton("0");
-    //caja = new QVBoxLayout(textOpciones);
-    //caja->addWidget(labelNumber);
+    boton=new QPushButton(*numero);
 
 }
 
 void Numero::editarBoton(int n){
-    setValor(n);
-    numero=new QString(n+"");
-
-    qDebug()<<n<<numero->at(0);
+    valor = n;
+    numero->setNum(n);
     boton->setText(*numero);
-    this->repaint();
 
 }
 

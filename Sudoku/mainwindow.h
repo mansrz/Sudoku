@@ -25,31 +25,24 @@ public:
     ~MainWindow();
 
 private slots:
-
-
-    //void on_toolButton_clicked();
-    void atrapar_numero(int n);
     void on_btnLlenar_clicked();
-    void cambiar_numero(int n);
     void boton_avisar(int posicion);
+    void obtenerCasilla(int n);
+    void cambiarNumero(int n);
 
 private:
     bool Validarbloque(int IniColumna,int FinColumna,int IniFila,int FinFila);
-         bool SeRepite(int numero, int *arreglo);
-          int getCasilla(int columna, int fila);
-          int numero_opcion=0;
+    bool SeRepite(int numero, int *arreglo);
+    int getCasilla(int columna, int fila);
+    int casilla=-1;
 
     Ui::MainWindow *ui;
-    //QPushButton *numberButton[9];
-    //QLabel *labelNumber[81];
-    QString *tex;
-    QSignalMapper *signalMapper,*signalMapper1;
+    QSignalMapper *sgnlMprNumero, *sgnlMprOpcion;
     int posicion;
     Numero *numeros[80];
     QVBoxLayout *gridNumeros [80];
     QPushButton *opcionesNumeros[8];
-    QString *texto,*numero;
-
+    QString *texto;
 
 };
 
