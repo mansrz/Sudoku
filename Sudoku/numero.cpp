@@ -21,6 +21,7 @@ Numero::Numero(int valor, int fila, int columna, bool visible){
 
     if (visible){
         editarBoton(valor);
+        boton->setEnabled(false);
     }
 
     cambiarColorBotonOriginal();
@@ -73,7 +74,6 @@ void Numero::setCuadricula(int fila, int columna){
            this->cuadricula=4;
        }else if(columnadiv==2){
            this->cuadricula=5;
-
        }
    }else if(filadiv==2){
        if(columnadiv==0){
@@ -85,18 +85,3 @@ void Numero::setCuadricula(int fila, int columna){
        }
    }
 }
-
-
-
-/*QRectF Numero::boundingRect(void) const {
-    return QRectF(0, 0, Dimensiones::numeroSize, Dimensiones::numeroSize);
-}*/
-
-
-/*void Numero::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) {
-    Q_UNUSED(widget);
-    // Draw the box.
-    painter->setPen(QPen(QColor(56, 165, 211), 1));
-    painter->drawRect(0, 0, Dimensiones::numeroSize, Dimensiones::numeroSize);
-}
-*/

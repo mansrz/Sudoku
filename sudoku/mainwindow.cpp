@@ -6,15 +6,15 @@
 #include <QString>
 #include <QVBoxLayout>
 #include <QSignalMapper>
+#include <QTimer>
+#include <QTime>
 
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
-
 
 }
 
@@ -29,10 +29,6 @@ MainWindow::~MainWindow()
             delete numeros[i+j];
         }
     }
-}
-void MainWindow::boton_avisar(int posicion){
-    this->posicion=posicion;
-    qDebug()<<posicion;
 }
 
 
@@ -53,7 +49,7 @@ void MainWindow::cambiarNumero(int n){
         if (ui->chkAlerta1->checkState() && !jugadaValida(casilla, n)){
             numeros[casilla]->cambiarColorBotonAlerta();
         }
-        if (ui->chkAlerta2->checkState() && !jugadaCorrecta()){
+        if (ui->chkAlerta2->checkState() && !jugadaCorrecta(casilla)){
             numeros[casilla]->cambiarColorBotonAlerta();
         }
         casilla=-1;
@@ -70,69 +66,19 @@ void MainWindow::cambiarNumero(int n){
 
 void MainWindow::on_btnLlenar_clicked()
 {
-    int i,j,cuadricula,k,l;
+    int i,j;
     sgnlMprNumero = new QSignalMapper();
     sgnlMprOpcion = new QSignalMapper();
     texto=new QString();
-/*
-    //nik: creacion de widgets para los grids
-    widgetCuad[0] = new QWidget(ui->frameCuad1);
-    widgetCuad[0]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[1] = new QWidget(ui->frameCuad2);
-    widgetCuad[1]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[2] = new QWidget(ui->frameCuad3);
-    widgetCuad[2]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[3] = new QWidget(ui->frameCuad4);
-    widgetCuad[3]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[4] = new QWidget(ui->frameCuad5);
-    widgetCuad[4]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[5] = new QWidget(ui->frameCuad6);
-    widgetCuad[5]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[6] = new QWidget(ui->frameCuad7);
-    widgetCuad[6]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[7] = new QWidget(ui->frameCuad8);
-    widgetCuad[7]->setGeometry(QRect(0, 0, 151, 151));
-    widgetCuad[8] = new QWidget(ui->frameCuad9);
-    widgetCuad[8]->setGeometry(QRect(0, 0, 151, 151));
-
-    //creacion de grids por cuadricula
-    for(i=0;i<9;i++){
-        gridCuad[i] = new QGridLayout(widgetCuad[i]);
-        //gridCuad[i]->setSpacing(3);
-        //gridCuad[i]->setContentsMargins(11, 11, 11, 11);
-        gridCuad[i]->setContentsMargins(0, 0, 0, 0);
-    }
-*/
 
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
-            numeros[(i*9)+j] = new Numero(j,i,j,false);
-            cuadricula = numeros[(i*9)+j]->getCuadricula();
-
-            //nik: frame con color para numeros
-            /*frameNumero[(i*9)+j] = new QFrame(widgetCuad[cuadricula]);
-
-            frameNumero[(i*9)+j]->setStyleSheet(QStringLiteral("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0231818, stop:0 rgba(0, 147, 155, 255), stop:1 rgba(255, 255, 255, 255));"));
-            frameNumero[(i*9)+j]->setFrameShape(QFrame::StyledPanel);
-            frameNumero[(i*9)+j]->setFrameShadow(QFrame::Raised);
-
-            widgetNumero[(i*9)+j] = new QWidget(widgetCuad[cuadricula]);
-            //widgetNumero[(i*9)+j]->setGeometry(QRect(2, 0, 77, 51));
-            widgetNumero[(i*9)+j]->setStyleSheet(QStringLiteral("background-color: rgb(229, 0, 141);"));
-            //frameNumero[i]->raise();}
-            gridCuad[cuadricula]->addWidget(widgetNumero[(i*9)+j]);
-
-            gridNumeros[(i*9)+j] = new QVBoxLayout(widgetNumero[i]);
-            gridNumeros[(i*9)+j]->setSpacing(6);
-            gridNumeros[(i*9)+j]->setContentsMargins(11, 11, 11, 11);
-            gridNumeros[(i*9)+j]->setContentsMargins(0, 0, 0, 0);
-*/
+            numeros[(i*9)+j] = new Numero(j+1,i,j,false);
             //nik: agregar numeros a un qvboxlayout
             gridNumeros[(i*9)+j] = new QVBoxLayout();
             gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->textOpciones);
             gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->boton);
-
             ui->gridTablero->addLayout(gridNumeros[(i*9)+j],i,j,0);
 
             sgnlMprNumero->setMapping(numeros[(i*9)+j]->boton,(i*9)+j);
@@ -150,6 +96,7 @@ void MainWindow::on_btnLlenar_clicked()
             texto->setNum((i*3)+j+1);
             opcionesNumeros[i+j]=new QPushButton(*texto);
             ui->gridNumeros->addWidget(opcionesNumeros[i+j],i,j,0);
+
             sgnlMprOpcion->setMapping(opcionesNumeros[i+j],(i*3)+j+1);
             // Juan: Conexiones de los button con el signal mapper
             connect( opcionesNumeros[i+j], SIGNAL(clicked()), sgnlMprOpcion, SLOT(map()));
@@ -158,24 +105,46 @@ void MainWindow::on_btnLlenar_clicked()
     // Juan: Y conexion del signal mapper con el slot genérico
     connect(sgnlMprOpcion, SIGNAL(mapped(int)), SLOT(cambiarNumero(int)));
 
+    //nik: timer
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
+    timer->start();
+    timeInicial = QTime::currentTime();
+    QTimer::singleShot(1000, this, SLOT(updateTimer()));
+
+
 }
 
+void MainWindow::updateTimer()
+{
+    int milisegundos, segundos, minutos;
+    QTime timeAct = QTime::currentTime();
+    int minInicial = timeInicial.minute();
+    int minActual = timeAct.minute();
+    int segInicial =  timeInicial.second();
+    int segActual = timeAct.second();
+    int msegInicial = timeInicial.msec();
+    int msegActual = timeAct.msec();
 
+    if (msegActual < msegInicial){
+        msegActual = 1000 + msegActual;
+        segActual = segActual -1;
+    }
 
-Numero* MainWindow::getTablero(){
-    return *numeros;
+    if (segActual < segInicial){
+        segActual = 60 + segActual;
+        minActual = minActual -1;
+    }
+
+    minutos = minActual - minInicial;
+    segundos = segActual - segInicial;
+    milisegundos = (msegActual - msegInicial);
+
+    QTime *time = new QTime(0,minutos,segundos,milisegundos);
+    QString text = time->toString("mm:ss.zzz");
+
+    ui->lcdNumber->display(text);
 }
-
-
-int MainWindow::getCasilla(int columna, int fila){
-     int valor;
-     if(columna<9 && fila<9){
-     valor=getTablero()[columna+fila].getValor();
-             return valor;
-     }
-     return-1;
-}
-
 
 bool MainWindow::jugadaValida(int casilla, int valor){
      int i, casillaCuad, iCuad, casillaCol, iCol, casillaFila, iFila;
@@ -196,12 +165,14 @@ bool MainWindow::jugadaValida(int casilla, int valor){
      return true;
  }
 
-bool MainWindow::jugadaCorrecta(){
+
+bool MainWindow::jugadaCorrecta(int casilla){
     if (numeros[casilla]->getValor()==numeros[casilla]->getValorCorrecto()){
         return true;
     }
     return false;
 }
+
 
 void MainWindow::on_chkAyuda_stateChanged(int arg1)
 {
@@ -217,4 +188,17 @@ void MainWindow::on_btnAyuda_clicked()
 {
     ayudaUsada=true;
     ui->btnAyuda->setEnabled(false);
+}
+
+void MainWindow::on_btnFinalizar_clicked()
+{
+    int i;
+    timer->stop();
+    for(i=0; i<81; i++){
+        if (!jugadaCorrecta(i)){
+            qDebug()<<"Ha perdido";
+            return;
+        }
+    }
+    qDebug()<<"Ha ganado, guardar puntaje";
 }
