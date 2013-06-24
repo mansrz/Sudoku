@@ -8,9 +8,10 @@ Numero::~Numero()
 }
 
 
-Numero::Numero(int valor, int fila, int columna){
+Numero::Numero(int valor, int fila, int columna, bool visible){
     this->fila = fila;
     this->columna = columna;
+    this->valorCorrecto = valor;
 
     numero = new QString("");
     textOpciones=new QLineEdit();
@@ -18,9 +19,11 @@ Numero::Numero(int valor, int fila, int columna){
 
     setCuadricula(fila, columna);
 
-    if (valor!=0){
+    if (visible){
         editarBoton(valor);
     }
+
+    cambiarColorBotonOriginal();
 
 }
 
@@ -31,9 +34,23 @@ void Numero::editarBoton(int n){
 
 }
 
-void Numero::cambiarColorBoton(){
+void Numero::cambiarColorBotonAlerta(){
     boton->setStyleSheet(QStringLiteral("background-color: rgb(229, 0, 141);"));
 
+}
+
+void Numero::cambiarColorBotonPista(){
+    boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 170, 255);"));
+
+}
+
+void Numero::cambiarColorBotonOriginal(){
+    int div=cuadricula/2;
+    if (cuadricula-div*2){
+        boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+    }else{
+        boton->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
+    }
 }
 
 

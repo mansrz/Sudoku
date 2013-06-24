@@ -37,17 +37,32 @@ void MainWindow::boton_avisar(int posicion){
 
 
 void MainWindow::obtenerCasilla(int n){
+    int i;
     casilla = n;
+    qDebug()<<numeros[casilla]->getValorCorrecto();
+    for (i=0;i<81;i++){
+        numeros[i]->cambiarColorBotonOriginal();
+    }
 }
 
 void MainWindow::cambiarNumero(int n){
+    int i;
     if(casilla!=-1){
         numeros[casilla]->editarBoton(n);
         //nik: cambiar color de boton si es invalido
-        if (ui->chkAlerta1->checkState() && !validar()){
-            numeros[casilla]->cambiarColorBoton();
+        if (ui->chkAlerta1->checkState() && !jugadaValida(casilla, n)){
+            numeros[casilla]->cambiarColorBotonAlerta();
+        }
+        if (ui->chkAlerta2->checkState() && !jugadaCorrecta()){
+            numeros[casilla]->cambiarColorBotonAlerta();
         }
         casilla=-1;
+    }else{
+        for (i=0;i<81;i++){
+            if (jugadaValida(i,n) && !numeros[i]->getValor()){
+                numeros[i]->cambiarColorBotonPista();
+            }
+        }
     }
 
 
@@ -92,7 +107,7 @@ void MainWindow::on_btnLlenar_clicked()
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
-            numeros[(i*9)+j] = new Numero(0,i,j);
+            numeros[(i*9)+j] = new Numero(j,i,j,false);
             cuadricula = numeros[(i*9)+j]->getCuadricula();
 
             //nik: frame con color para numeros
@@ -162,7 +177,7 @@ int MainWindow::getCasilla(int columna, int fila){
 }
 
 
- bool MainWindow::validar(){     
+bool MainWindow::jugadaValida(int casilla, int valor){
      int i, casillaCuad, iCuad, casillaCol, iCol, casillaFila, iFila;
      for (i=0;i<81;i++){
          casillaCuad = numeros[casilla]->getCuadricula();
@@ -173,10 +188,33 @@ int MainWindow::getCasilla(int columna, int fila){
          iFila = numeros[i]->getFila();
 
          if (casillaCuad == iCuad|| casillaCol == iCol || casillaFila == iFila){
-             if (i!=casilla && numeros[casilla]->getValor()== numeros[i]->getValor()){
+             if (i!=casilla && valor == numeros[i]->getValor()){
                  return false;
              }
          }
      }
      return true;
  }
+
+bool MainWindow::jugadaCorrecta(){
+    if (numeros[casilla]->getValor()==numeros[casilla]->getValorCorrecto()){
+        return true;
+    }
+    return false;
+}
+
+void MainWindow::on_chkAyuda_stateChanged(int arg1)
+{
+    if (ui->chkAyuda->checkState() && !ayudaUsada){
+        ui->btnAyuda->setEnabled(true);
+    }
+    if (!ui->chkAyuda->checkState()){
+        ui->btnAyuda->setEnabled(false);
+    }
+}
+
+void MainWindow::on_btnAyuda_clicked()
+{
+    ayudaUsada=true;
+    ui->btnAyuda->setEnabled(false);
+}

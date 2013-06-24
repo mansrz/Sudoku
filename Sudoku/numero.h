@@ -31,18 +31,22 @@ class Numero : public QWidget {
 public:
     explicit Numero(QObject *parent = 0);
     ~Numero();
-    Numero(int numero, int columna, int fila);
+    Numero(int numero, int columna, int fila, bool visible);
 
     void setCuadricula(int fila, int columna);
     void setValor(int valor){this->valor = valor;}
+    void setValorCorrecto(int valor){this->valorCorrecto = valor;}
 
     int getFila(void) const { return fila; }
     int getColumna(void) const { return columna; }
     int getCuadricula(void) const { return cuadricula; }
     int getValor(void) const { return valor; }
+    int getValorCorrecto(void) const { return valorCorrecto; }
 
     void editarBoton(int n);
-    void cambiarColorBoton();
+    void cambiarColorBotonAlerta();
+    void cambiarColorBotonPista();
+    void cambiarColorBotonOriginal();
 
     //QVBoxLayout *caja;
     QLabel *labelNumber;
@@ -62,6 +66,7 @@ private:
     int fila;
     int columna;
     int valor;
+    int valorCorrecto;
 
 };
 

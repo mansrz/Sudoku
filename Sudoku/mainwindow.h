@@ -20,7 +20,8 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    bool validar();
+    bool jugadaValida(int casilla, int valor);
+    bool jugadaCorrecta();
     Numero* getTablero();
 
 
@@ -32,9 +33,14 @@ private slots:
     void obtenerCasilla(int n);
     void cambiarNumero(int n);
 
+    void on_chkAyuda_stateChanged(int arg1);
+
+    void on_btnAyuda_clicked();
+
 private:
     int getCasilla(int columna, int fila);
     int casilla=-1;
+    bool ayudaUsada=false;
 
     Ui::MainWindow *ui;
     QSignalMapper *sgnlMprNumero, *sgnlMprOpcion;
