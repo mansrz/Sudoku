@@ -36,9 +36,12 @@ void MainWindow::obtenerCasilla(int n){
     int i;
     casilla = n;
     qDebug()<<numeros[casilla]->getValorCorrecto();
-    for (i=0;i<81;i++){
-        numeros[i]->cambiarColorBotonOriginal();
+    if (colorCambiado){
+        for (i=0;i<81;i++){
+            numeros[i]->cambiarColorBotonOriginal();
+        }
     }
+
 }
 
 void MainWindow::cambiarNumero(int n){
@@ -48,15 +51,18 @@ void MainWindow::cambiarNumero(int n){
         //nik: cambiar color de boton si es invalido
         if (ui->chkAlerta1->checkState() && !jugadaValida(casilla, n)){
             numeros[casilla]->cambiarColorBotonAlerta();
+            colorCambiado = true;
         }
         if (ui->chkAlerta2->checkState() && !jugadaCorrecta(casilla)){
             numeros[casilla]->cambiarColorBotonAlerta();
+            colorCambiado = true;
         }
         casilla=-1;
     }else{
         for (i=0;i<81;i++){
-            if (jugadaValida(i,n) && !numeros[i]->getValor()){
+            if (ui->chkPista->checkState() && jugadaValida(i,n) && !numeros[i]->getValor()){
                 numeros[i]->cambiarColorBotonPista();
+                colorCambiado = true;
             }
         }
     }
@@ -74,7 +80,12 @@ void MainWindow::on_btnLlenar_clicked()
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
-            numeros[(i*9)+j] = new Numero(j+1,i,j,false);
+            if(j==i){
+                numeros[(i*9)+j] = new Numero(j+1,i,j,true);
+            }else{
+                numeros[(i*9)+j] = new Numero(j+1,i,j,false);
+            }
+
             //nik: agregar numeros a un qvboxlayout
             gridNumeros[(i*9)+j] = new QVBoxLayout();
             gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->textOpciones);
@@ -185,9 +196,35 @@ void MainWindow::on_chkAyuda_stateChanged(int arg1)
 }
 
 void MainWindow::on_btnAyuda_clicked()
-{
-    ayudaUsada=true;
+{    
+    int n,i;
+    int *arrayN = new int[81];
+    int contVacias = 0;
+    for (i=0;i<81;i++){
+        if (numeros[i]->getValor()==-1){
+            arrayN[contVacias]=i;
+            contVacias=contVacias+1;
+        }
+    }
+    if(contVacias != 0){
+        n = qrand()%contVacias;
+        numeros[arrayN[n]]->editarBoton(numeros[arrayN[n]]->getValorCorrecto());
+    }
+
+    //nik: ayuda usando un random entre 0 y 80, se queda cuando hay muy pocas casillas vacias
+   /* while (!ayudaUsada){
+        n = qrand()%81;
+        qDebug()<<n;
+        if (!numeros[n]->getValor()){
+            numeros[n]->editarBoton(numeros[n]->getValorCorrecto());
+            ayudaUsada=true;
+        }
+    }*/
+
+    //nik: solo permite usar una vez la ayuda
     ui->btnAyuda->setEnabled(false);
+    ayudaUsada=true;
+
 }
 
 void MainWindow::on_btnFinalizar_clicked()

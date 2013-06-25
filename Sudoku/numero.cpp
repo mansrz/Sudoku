@@ -12,6 +12,7 @@ Numero::Numero(int valor, int fila, int columna, bool visible){
     this->fila = fila;
     this->columna = columna;
     this->valorCorrecto = valor;
+    this->valor = -1;
 
     numero = new QString("");
     textOpciones=new QLineEdit();
@@ -21,9 +22,9 @@ Numero::Numero(int valor, int fila, int columna, bool visible){
 
     if (visible){
         editarBoton(valor);
-        boton->setEnabled(false);
     }
 
+    boton->setEnabled(!visible);
     cambiarColorBotonOriginal();
 
 }

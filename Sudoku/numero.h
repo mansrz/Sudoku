@@ -21,6 +21,7 @@
 #include <QMenu>
 #include <QKeyEvent>
 #include <math.h>
+#include <QDebug>
 #include "Dimensiones.h"
 
 class Numero : public QWidget {

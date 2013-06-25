@@ -40,6 +40,7 @@ private slots:
 private:
     int casilla=-1;
     bool ayudaUsada=false;
+    bool colorCambiado = false;
     Ui::MainWindow *ui;
     QSignalMapper *sgnlMprNumero, *sgnlMprOpcion;
     Numero *numeros[80];
