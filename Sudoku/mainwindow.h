@@ -13,6 +13,7 @@
 #include <QFile>
 #include <QTextStream>
 #include "numero.h"
+#include "generador.h"
 
 namespace Ui {
 class MainWindow;
@@ -61,6 +62,7 @@ private:
     QString *texto;
     QTimer *timer;
     QTime timeInicial;
+    Generador *generador;
 
 };
 

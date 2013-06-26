@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    numero.cpp
+    numero.cpp \
+    generador.cpp
 
 HEADERS  += mainwindow.h \
     numero.h \
-    Dimensiones.h
+    Dimensiones.h \
+    generador.h
 
 FORMS    += mainwindow.ui
 

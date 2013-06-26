@@ -1,4 +1,4 @@
-#include "Generador.h"
+#include "generador.h"
 #include <list>
 
 
@@ -10,39 +10,7 @@ Generador::~Generador(void)
 {
 }
 
-void Generador::GenerarTablero( int dificultad){
-    bool posible;
 
-
-    tablero=(int*) malloc(sizeof(int)*81);
-    for(int i=0;i<81;i++) tablero[i]=0;
-    generarSolucionRandom();
-
-
-}
-void Generador::generarSolucionRandom(){
-    srand((unsigned int) time(NULL));
-    int x, y, num_de_Random,v;
-
-            num_de_Random = 25;
-       do {
-           for(int i=0;i<81;i++) tablero[i]=0;
-            for (int i = 0; i < num_de_Random; ++i) {
-                x = rand() % 9;
-                y = rand() % 9;
-                v = rand() % 9 + 1;
-                if (MovimientoValido(x, y, v)){
-                    Set(x, y, v);
-                }
-                else{
-                    i--;
-                }
-                x=y=v=0;
-            }
-
-
-     } while (!resolverTablero());
-}
 
 bool Generador::BackTrackSolucion(int startx, int starty){
 
@@ -104,16 +72,6 @@ bool Generador::esValido(){
     return (ValidarVertical() && ValidarHorizontal() && ValidarBloque());
 }
 
-bool Generador::MovimientoValido(int x, int y, int v ){
-
-    if (ChequearHorizontal(x, y, v) && ChequearVertical(x, y, v) && ChequearBloque(x, y, v))
-            {return true;
-}
-        else{
-            return false;
-
-        }
-}
 
 bool Generador::ChequearHorizontal(int x, int y, int v){
     bool valido = (tablero[(x*9)+y] == 0);
@@ -256,5 +214,51 @@ bool Generador::escanearSolucion(){
     }
 
         return esCompleto();
+}
+
+bool Generador::MovimientoValido(int x, int y, int v ){
+
+    if (ChequearHorizontal(x, y, v) && ChequearVertical(x, y, v) && ChequearBloque(x, y, v))
+            {return true;
+}
+        else{
+            return false;
+
+        }
+}
+
+
+
+void Generador::generarSolucionRandom(){
+    srand((unsigned int) time(NULL));
+    int x, y, num_de_Random,v;
+
+            num_de_Random = 25;
+       do {
+           for(int i=0;i<81;i++) tablero[i]=0;
+            for (int i = 0; i < num_de_Random; ++i) {
+                x = rand() % 9;
+                y = rand() % 9;
+                v = rand() % 9 + 1;
+                if (MovimientoValido(x, y, v)){
+                    Set(x, y, v);
+                }
+                else{
+                    i--;
+                }
+                x=y=v=0;
+            }
+
+
+     } while (!resolverTablero());
+}
+
+
+void Generador::GenerarTablero( int dificultad){
+
+    tablero=(int*) malloc(sizeof(int)*81);
+    for(int i=0;i<81;i++) tablero[i]=0;
+    generarSolucionRandom();
+
 }
 

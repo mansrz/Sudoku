@@ -1,7 +1,4 @@
-#pragma once
 #include <stdlib.h>
-#include <stdio.h>
-
 #include <stack>
 #include <time.h>
 class Generador
