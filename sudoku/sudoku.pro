@@ -21,3 +21,6 @@ HEADERS  += mainwindow.h \
     Dimensiones.h
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    savedGame.txt

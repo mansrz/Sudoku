@@ -10,6 +10,8 @@
 #include <QWidget>
 #include <QTime>
 #include <QTimer>
+#include <QFile>
+#include <QTextStream>
 #include "numero.h"
 
 namespace Ui {
@@ -24,6 +26,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     bool jugadaValida(int casilla, int valor);
     bool jugadaCorrecta(int casilla);
+    void creacionNumeros(int indice, int valorCorrecto, int col, int fila, int visible);
+    void creacionBotones();
+    void inicializarTimer();
+
 
     ~MainWindow();
 
@@ -36,6 +42,12 @@ private slots:
     void updateTimer();
 
     void on_btnFinalizar_clicked();
+
+    void on_actionGuardar_partida_triggered();
+
+    void on_actionSalir_triggered();
+
+    void on_actionCargar_partida_triggered();
 
 private:
     int casilla=-1;

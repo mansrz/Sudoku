@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    sgnlMprNumero = new QSignalMapper();
+    sgnlMprOpcion = new QSignalMapper();
+    texto=new QString();
 }
 
 MainWindow::~MainWindow()
@@ -59,10 +62,12 @@ void MainWindow::cambiarNumero(int n){
         }
         casilla=-1;
     }else{
-        for (i=0;i<81;i++){
-            if (ui->chkPista->checkState() && jugadaValida(i,n) && !numeros[i]->getValor()){
-                numeros[i]->cambiarColorBotonPista();
-                colorCambiado = true;
+        if(ui->chkPista->checkState()){
+            for (i=0;i<81;i++){
+                if ( jugadaValida(i,n) && numeros[i]->getValor()==-1){
+                    numeros[i]->cambiarColorBotonPista();
+                    colorCambiado = true;
+                }
             }
         }
     }
@@ -73,34 +78,30 @@ void MainWindow::cambiarNumero(int n){
 void MainWindow::on_btnLlenar_clicked()
 {
     int i,j;
-    sgnlMprNumero = new QSignalMapper();
-    sgnlMprOpcion = new QSignalMapper();
-    texto=new QString();
 
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             if(j==i){
-                numeros[(i*9)+j] = new Numero(j+1,i,j,true);
+                creacionNumeros(i*9+j,j+1,i,j,1);
             }else{
-                numeros[(i*9)+j] = new Numero(j+1,i,j,false);
+                creacionNumeros(i*9+j,j+1,i,j,0);
             }
-
-            //nik: agregar numeros a un qvboxlayout
-            gridNumeros[(i*9)+j] = new QVBoxLayout();
-            gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->textOpciones);
-            gridNumeros[(i*9)+j]->addWidget(numeros[(i*9)+j]->boton);
-            ui->gridTablero->addLayout(gridNumeros[(i*9)+j],i,j,0);
-
-            sgnlMprNumero->setMapping(numeros[(i*9)+j]->boton,(i*9)+j);
-            //Juan: Conexiones de los button con el signal mapper
-            connect(numeros[((i*9)+j)]->boton, SIGNAL(clicked()), sgnlMprNumero, SLOT (map()));
 
         }
     }
     connect(sgnlMprNumero, SIGNAL (mapped (int)), SLOT (obtenerCasilla(int)));
 
+    creacionBotones();
+    inicializarTimer();
 
+    ui->btnLlenar->setEnabled(false);
+    ui->btnFinalizar->setEnabled(true);
+
+}
+
+void MainWindow::creacionBotones(){
+    int i,j;
     //botones opciones 1-9
     for(i=0;i<3;i++){
         for(j=0;j<3;j++){
@@ -116,14 +117,30 @@ void MainWindow::on_btnLlenar_clicked()
     // Juan: Y conexion del signal mapper con el slot genérico
     connect(sgnlMprOpcion, SIGNAL(mapped(int)), SLOT(cambiarNumero(int)));
 
+}
+
+void MainWindow::inicializarTimer(){
     //nik: timer
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
     timer->start();
     timeInicial = QTime::currentTime();
     QTimer::singleShot(1000, this, SLOT(updateTimer()));
+}
 
 
+void MainWindow::creacionNumeros(int i, int valor, int col, int fila, int visible){
+
+    numeros[i] = new Numero(valor,col,fila,visible);
+    //nik: agregar numeros a un qvboxlayout
+    gridNumeros[i] = new QVBoxLayout();
+    gridNumeros[i]->addWidget(numeros[i]->textOpciones);
+    gridNumeros[i]->addWidget(numeros[i]->boton);
+    ui->gridTablero->addLayout(gridNumeros[i],col,fila,0);
+
+    sgnlMprNumero->setMapping(numeros[i]->boton,i);
+    //Juan: Conexiones de los button con el signal mapper
+    connect(numeros[i]->boton, SIGNAL(clicked()), sgnlMprNumero, SLOT (map()));
 }
 
 void MainWindow::updateTimer()
@@ -238,4 +255,92 @@ void MainWindow::on_btnFinalizar_clicked()
         }
     }
     qDebug()<<"Ha ganado, guardar puntaje";
+}
+
+void MainWindow::on_actionGuardar_partida_triggered()
+{
+    int i;
+    QString text, textTemp;
+
+    //Open the file for writing, and set the text stream to write, to the file.
+    QFile file_for_writing("C:/Users/user/Documents/GitHub/Sudoku/Sudoku/savedGame.txt"); //nik: no sirvio poniendo solo savedGame.txt
+    file_for_writing.open(QIODevice::Text | QIODevice::WriteOnly); //
+    QTextStream text_stream_for_writing(&file_for_writing);
+
+    for (i=0;i<81;i++){
+        //set the text of the file
+        text.setNum(numeros[i]->getValorCorrecto());
+        text.append("\n");
+        textTemp.setNum(numeros[i]->getValor());
+        text.append(textTemp);
+        text.append("\n");
+        textTemp.setNum(numeros[i]->boton->isEnabled());
+        text.append(textTemp);
+        text.append("\n");
+        qDebug()<<text;
+        //Write the text on the stream
+        text_stream_for_writing << text;
+    }
+
+    file_for_writing.flush();
+
+    //close the file
+    file_for_writing.close();
+
+    //empty the text.
+    text.clear();
+
+}
+
+void MainWindow::on_actionSalir_triggered()
+{
+    close();
+}
+
+void MainWindow::on_actionCargar_partida_triggered()
+{
+    /*int *arrayValorCorrect = new int[81];
+    int *arrayValor = new int[81];
+    int *arrayModificable = new int[81];*/
+
+    int i,k,j;
+    int *valores = new int[2];
+
+    //Open the file for writing, and set the text stream to write, to the file.
+    QFile file("C:/Users/user/Documents/GitHub/Sudoku/Sudoku/savedGame.txt"); //nik: no sirvio poniendo solo savedGame.txt
+    file.open(QIODevice::Text | QIODevice::ReadOnly); //
+    QTextStream text_stream(&file);
+
+    for (i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            qDebug()<<"entre for";
+            for (k=0;k<3;k++){
+                valores[k]=text_stream.readLine().toInt();
+                qDebug()<<valores[k];
+            }
+            qDebug()<<i*9+j;
+
+            creacionNumeros(i*9+j, valores[0], i, j, !valores[2]);
+            qDebug()<<"creado";
+
+
+            if (valores[1]!=-1){
+                numeros[i*9+j]->editarBoton(valores[1]);
+            }
+        }
+    }
+    qDebug()<<"sali for";
+    connect(sgnlMprNumero, SIGNAL (mapped (int)), SLOT (obtenerCasilla(int)));
+    qDebug()<<"inicializaciones";
+    creacionBotones();
+    inicializarTimer();
+
+    ui->btnLlenar->setEnabled(false);
+    ui->btnFinalizar->setEnabled(true);
+
+    file.flush();
+
+    //close the file
+    file.close();
+
 }
