@@ -9,6 +9,9 @@ Numero::~Numero()
 
 
 Numero::Numero(int valor, int fila, int columna, bool visible){
+    QFont font;
+    font.setPointSize(14);
+
     this->fila = fila;
     this->columna = columna;
     this->valorCorrecto = valor;
@@ -25,7 +28,16 @@ Numero::Numero(int valor, int fila, int columna, bool visible){
     }
 
     boton->setEnabled(!visible);
+
     cambiarColorBotonOriginal();
+    this->setFrameStyle(2);
+    boton->setStyleSheet(QStringLiteral ("border:none"));
+    boton->setFont(font);
+
+    gridNumero = new QVBoxLayout(this);
+    gridNumero->setContentsMargins(0,0,0,0);
+    gridNumero->addWidget(textOpciones);
+    gridNumero->addWidget(boton);
 
 }
 
@@ -37,21 +49,23 @@ void Numero::editarBoton(int n){
 }
 
 void Numero::cambiarColorBotonAlerta(){
-    boton->setStyleSheet(QStringLiteral("background-color: rgb(229, 0, 141);"));
-
+    //boton->setStyleSheet(QStringLiteral("background-color: rgb(229, 0, 141);"));
+    this->setStyleSheet(QStringLiteral("background-color: rgb(229, 0, 141);"));
 }
 
 void Numero::cambiarColorBotonPista(){
-    boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 170, 255);"));
-
+    //boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 170, 255);"));
+    this->setStyleSheet(QStringLiteral("background-color: rgb(0, 170, 255);"));
 }
 
 void Numero::cambiarColorBotonOriginal(){
     int div=cuadricula/2;
     if (cuadricula-div*2){
-        boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+        //boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+        this->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
     }else{
-        boton->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
+        //boton->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
+        this->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
     }
 }
 

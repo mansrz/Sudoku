@@ -130,10 +130,12 @@ void MainWindow::creacionNumeros(int i, int valor, int col, int fila, int visibl
 
     numeros[i] = new Numero(valor,col,fila,visible);
     //nik: agregar numeros a un qvboxlayout
-    gridNumeros[i] = new QVBoxLayout();
+    /*gridNumeros[i] = new QVBoxLayout();
     gridNumeros[i]->addWidget(numeros[i]->textOpciones);
     gridNumeros[i]->addWidget(numeros[i]->boton);
-    ui->gridTablero->addLayout(gridNumeros[i],col,fila,0);
+    ui->gridTablero->addLayout(gridNumeros[i],col,fila,0);*/
+
+    ui->gridTablero->addWidget(numeros[i], col, fila, 0);
 
     sgnlMprNumero->setMapping(numeros[i]->boton,i);
     //Juan: Conexiones de los button con el signal mapper

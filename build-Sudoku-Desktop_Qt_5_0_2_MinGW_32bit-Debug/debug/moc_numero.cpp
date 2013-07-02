@@ -60,7 +60,7 @@ void Numero::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
 }
 
 const QMetaObject Numero::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_Numero.data,
+    { &QFrame::staticMetaObject, qt_meta_stringdata_Numero.data,
       qt_meta_data_Numero,  qt_static_metacall, 0, 0}
 };
 
@@ -75,12 +75,12 @@ void *Numero::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_Numero.stringdata))
         return static_cast<void*>(const_cast< Numero*>(this));
-    return QWidget::qt_metacast(_clname);
+    return QFrame::qt_metacast(_clname);
 }
 
 int Numero::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QFrame::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;

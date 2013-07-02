@@ -178,6 +178,10 @@ public:
         btnLlenar = new QPushButton(centralWidget);
         btnLlenar->setObjectName(QStringLiteral("btnLlenar"));
         btnLlenar->setGeometry(QRect(546, 180, 75, 23));
+        QFont font;
+        font.setPointSize(8);
+        btnLlenar->setFont(font);
+        btnLlenar->setStyleSheet(QStringLiteral("border-color: none;"));
         gbNumeros = new QGroupBox(centralWidget);
         gbNumeros->setObjectName(QStringLiteral("gbNumeros"));
         gbNumeros->setGeometry(QRect(550, 210, 151, 131));

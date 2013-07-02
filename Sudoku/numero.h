@@ -12,7 +12,7 @@
 * @date 06/01/2013
 */
 
-#include <QWidget>
+#include <QFrame>
 #include <QLabel>
 #include <QDebug>
 #include <QLineEdit>
@@ -23,7 +23,7 @@
 #include <QDebug>
 #include "Dimensiones.h"
 
-class Numero : public QWidget {
+class Numero : public QFrame {
 
     Q_OBJECT
     //Q_INTERFACES(QGraphicsItem)
@@ -139,6 +139,7 @@ public:
     QLineEdit *textOpciones;
     QPushButton *boton;
     QString *numero;
+    QVBoxLayout *gridNumero;
 
 signals:
 

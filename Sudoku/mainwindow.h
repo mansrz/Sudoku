@@ -162,6 +162,7 @@ private:
     QSignalMapper *sgnlMprNumero, *sgnlMprOpcion;
     Numero *numeros[80];
     QVBoxLayout *gridNumeros [80];
+    QFrame *frameNumeros[80];
     QPushButton *opcionesNumeros[8];
     QString *texto;
     QTimer *timer;
