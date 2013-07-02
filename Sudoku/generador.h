@@ -50,9 +50,9 @@ public:
     * @return Verdadero si la jugada es valida, falso si no lo es.
     */
     bool escanearSolucion();
-
+    void generarCasillasVisibles();
     int *tablero;
-
+    bool *casillas_visibles;
 
  private:
 

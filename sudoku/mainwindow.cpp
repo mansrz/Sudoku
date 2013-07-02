@@ -79,16 +79,12 @@ void MainWindow::cambiarNumero(int n){
 void MainWindow::on_btnLlenar_clicked()
 {
     int i,j;
-
+    generador->GenerarTablero(0);
+    generador->generarCasillasVisibles();
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
-            if(j==i){
-                creacionNumeros(i*9+j,j+1,i,j,1);
-            }else{
-                creacionNumeros(i*9+j,j+1,i,j,0);
-            }
-
+                creacionNumeros(i*9+j,generador->tablero[i*9+j],i,j,generador->casillas_visibles[i*9+j]);
         }
     }
     connect(sgnlMprNumero, SIGNAL (mapped (int)), SLOT (obtenerCasilla(int)));
@@ -263,8 +259,7 @@ void MainWindow::on_actionGuardar_partida_triggered()
     int i;
     QString text, textTemp;
 
-    //Open the file for writing, and set the text stream to write, to the file.
-    QFile file_for_writing("C:/Users/user/Documents/GitHub/Sudoku/Sudoku/savedGame.txt"); //nik: no sirvio poniendo solo savedGame.txt
+    QFile file_for_writing("../savedGame.sud"); //nik: no sirvio poniendo solo savedGame.txt
     file_for_writing.open(QIODevice::Text | QIODevice::WriteOnly); //
     QTextStream text_stream_for_writing(&file_for_writing);
 
@@ -307,9 +302,8 @@ void MainWindow::on_actionCargar_partida_triggered()
     int i,k,j;
     int *valores = new int[2];
 
-    //Open the file for writing, and set the text stream to write, to the file.
-    QFile file("C:/Users/user/Documents/GitHub/Sudoku/Sudoku/savedGame.txt"); //nik: no sirvio poniendo solo savedGame.txt
-    file.open(QIODevice::Text | QIODevice::ReadOnly); //
+    QFile file("../savedGame.sud");
+    file.open(QIODevice::Text | QIODevice::ReadOnly);
     QTextStream text_stream(&file);
 
     for (i=0;i<9;i++){

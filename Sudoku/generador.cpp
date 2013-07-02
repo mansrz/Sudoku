@@ -9,7 +9,20 @@ Generador::Generador(void)
 Generador::~Generador(void)
 {
 }
+void Generador::generarCasillasVisibles(){
+    srand((unsigned int) time(NULL));
+    int x, y, num_de_Random;
+    casillas_visibles =new bool[81];
+            num_de_Random = 50;
+            for(int i=0;i<81;i++)casillas_visibles[i]=false;
 
+            for (int i = 0; i < num_de_Random; ++i) {
+                x = rand() % 9;
+                y = rand() % 9;
+                casillas_visibles[(x*9)+y]=true;
+                x=y=0;
+            }
+}
 
 
 bool Generador::BackTrackSolucion(int startx, int starty){
