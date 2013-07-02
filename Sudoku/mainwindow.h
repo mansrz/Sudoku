@@ -25,6 +25,7 @@
 #include <QTextStream>
 #include "numero.h"
 #include "generador.h"
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -98,6 +99,7 @@ private slots:
     void on_btnLlenar_clicked();
 
 
+
     /**
     * obtenerCasilla Se establece el numero de la casilla a la que en ese momento se a dado clic.
     * @param n Indice del arreglo de numeros al que pertenece la casilla.
@@ -154,10 +156,22 @@ private slots:
     */
     void on_actionCargar_partida_triggered();
 
+
+
+
+    /**
+     * on_dificultad_currentIndexChanged Da el valor para la dificultad
+     */
+    void on_dificultad_currentIndexChanged(const QString &arg1);
+
+
+
+
 private:
     int casilla=-1;
     bool ayudaUsada=false;
     bool colorCambiado = false;
+    int num_dificultad=0;
     Ui::MainWindow *ui;
     QSignalMapper *sgnlMprNumero, *sgnlMprOpcion;
     Numero *numeros[80];

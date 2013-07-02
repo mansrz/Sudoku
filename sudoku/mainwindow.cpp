@@ -8,6 +8,7 @@
 #include <QSignalMapper>
 #include <QTimer>
 #include <QTime>
+#include <QComboBox>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,7 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     sgnlMprNumero = new QSignalMapper();
     sgnlMprOpcion = new QSignalMapper();
+
+
     texto=new QString();
+
     generador=new Generador();
 }
 
@@ -79,7 +83,8 @@ void MainWindow::cambiarNumero(int n){
 void MainWindow::on_btnLlenar_clicked()
 {
     int i,j;
-    generador->GenerarTablero(0);
+
+    generador->GenerarTablero(num_dificultad);
     generador->generarCasillasVisibles();
     //creacion de numeros
     for(i=0;i<9;i++){
@@ -96,6 +101,7 @@ void MainWindow::on_btnLlenar_clicked()
     ui->btnFinalizar->setEnabled(true);
 
 }
+
 
 void MainWindow::creacionBotones(){
     int i,j;
@@ -136,9 +142,9 @@ void MainWindow::creacionNumeros(int i, int valor, int col, int fila, int visibl
     ui->gridTablero->addLayout(gridNumeros[i],col,fila,0);*/
 
     ui->gridTablero->addWidget(numeros[i], col, fila, 0);
-
     sgnlMprNumero->setMapping(numeros[i]->boton,i);
     //Juan: Conexiones de los button con el signal mapper
+
     connect(numeros[i]->boton, SIGNAL(clicked()), sgnlMprNumero, SLOT (map()));
 }
 
@@ -340,4 +346,19 @@ void MainWindow::on_actionCargar_partida_triggered()
     //close the file
     file.close();
 
+}
+
+
+
+void MainWindow::on_dificultad_currentIndexChanged(const QString &arg1)
+{
+    if(!arg1.compare("1 Facil")){
+          num_dificultad=1;
+    }else if(!arg1.compare("2 Intermedio")){
+        num_dificultad=2;
+    }else if(!arg1.compare("3 Dificil")){
+        num_dificultad=3;
+    }else{
+        num_dificultad=1;
+    }
 }
