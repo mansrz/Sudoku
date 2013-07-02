@@ -33,21 +33,23 @@ public:
     /**
     * GenerarTablero
     * @param dificultad
+	@return Genera el tablero con solucion
+	
     */
     void GenerarTablero(int dificultad);
-    //static bool SolveBoard(Board * board);
+    
 
 
     /**
     * resolverTablero
-    * @return Verdadero si  , falso si no lo es.
+    * @return Resuelve el tablero de una manera mas superficial.
     */
     bool resolverTablero();
 
 
     /**
     * escanearSolucion
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Escanea posible solucion del tablero.
     */
     bool escanearSolucion();
     void generarCasillasVisibles();
@@ -60,21 +62,21 @@ public:
     * BackTrackSolucion
     * @param startx
     * @param starty
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Algoritmo para poder llenar espacios vacios del tablero
     */
     bool BackTrackSolucion(int startx, int starty);
 
 
     /**
     * esCompleto
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Verifica si hay un 0 en el tablero.
     */
     bool esCompleto();
 
 
     /**
     * esValido
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Verdadero si el tablero es valida, falso si no lo es.
     */
     bool esValido();
 
@@ -100,7 +102,7 @@ public:
     * @param x
     * @param y
     * @param v
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Modifica el valor del arreglo tablero en la posicion x,y
     */
     void Set(int x, int y, int v);
 
@@ -110,7 +112,7 @@ public:
     * @param x
     * @param y
     * @param v
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Verifica si hay un numero repetido en las horizontales.
     */
     bool ChequearHorizontal(int x, int y, int v);
 
@@ -120,7 +122,7 @@ public:
     * @param x
     * @param y
     * @param v
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Verifica si hay un numero repetido en las verticales.
     */
     bool ChequearVertical(int x, int y, int v);
 
@@ -130,28 +132,28 @@ public:
     * @param x
     * @param y
     * @param v
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Verifica si hay un numero repetido en el bloque.
     */
     bool ChequearBloque(int x, int y, int v);
 
 
     /**
     * ValidarHorizontal
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Valida las horizontales del tablero
     */
     bool ValidarHorizontal();
 
 
     /**
     * ValidarVertical
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Valida las verticales del tablero
     */
     bool ValidarVertical();
 
 
     /**
     * ValidarBloque
-    * @return Verdadero si la jugada es valida, falso si no lo es.
+    * @return Valida los bloques del tablero
     */
     bool ValidarBloque();
 
