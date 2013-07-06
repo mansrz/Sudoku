@@ -20,7 +20,8 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     numero.h \
     Dimensiones.h \
-    generador.h
+    generador.h \
+    Posicion.h
 
 FORMS    += mainwindow.ui
 

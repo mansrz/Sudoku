@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     sgnlMprNumero = new QSignalMapper();
     sgnlMprOpcion = new QSignalMapper();
 
-
     texto=new QString();
 
     generador=new Generador();

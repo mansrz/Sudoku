@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <stack>
 #include <time.h>
-
+#include <QList>
+#include <QStack.h>
+#include "Posicion.h"
 /**
 * @file generador.h
 * @brief Este archivo contiene la interfaz del generador de Sudokus
@@ -13,9 +15,11 @@
 * @date 06/01/2013
 */
 
+
 class Generador
 {
 public:
+
 
     /**
     * Generador Metodo constructor.
@@ -37,7 +41,7 @@ public:
 	
     */
     void GenerarTablero(int dificultad);
-    
+   int GetInsertar(int dificultad) ;
 
 
     /**
@@ -55,9 +59,13 @@ public:
     void generarCasillasVisibles();
     int *tablero;
     bool *casillas_visibles;
+    QList<Posicion> lista_op;
+    QStack<Posicion> pila;
 
  private:
-
+    bool EstaLlenoTablero();
+    bool VerificarResolucion(bool UnaSolucion);
+    bool Eliminar_Resolver(int realx, int realy);
     /**
     * BackTrackSolucion
     * @param startx

@@ -1,5 +1,6 @@
 #include "generador.h"
-#include <list>
+#include <Qlist>
+#include <QDebug>
 
 
 Generador::Generador(void)
@@ -118,6 +119,18 @@ bool Generador::ChequearBloque(int x, int y, int v){
 
     return valido;
 }
+
+int Generador::GetInsertar(int dificultad) {
+
+    if(dificultad<4)
+        return 1+rand()%5;
+    else if(dificultad==5)
+        return 0;
+    else
+        return (-1)*(2+rand()%4);
+
+}
+
 
 bool Generador::ValidarHorizontal(){
     bool elementosHorizontales[10];
@@ -265,13 +278,153 @@ void Generador::generarSolucionRandom(){
 
      } while (!resolverTablero());
 }
+bool Generador::EstaLlenoTablero(){
+    bool encontrado = false;
+
+       // Rows
+       for (int y = 0; y < 9 && !encontrado; ++y) {
+           bool sinLlenar = false;
+           for (int x = 0; x < 9 && !sinLlenar; ++x)
+               sinLlenar = (tablero[(x*9)+ y] == 0);
+           encontrado = !sinLlenar;
+       }
+
+       // Columns
+       for (int x = 0; x < 9 && !encontrado; ++x) {
+           bool sinLlenar = false;
+           for (int y = 0; y < 9 && !sinLlenar; ++y)
+               sinLlenar = (tablero[(x*9)+ y] == 0);
+           encontrado = !sinLlenar;
+       }
+
+       //Blocks
+       for (int startX = 0; !encontrado && startX < 9; startX += 3) // Iterate over the blocks, horizontally
+           for (int startY = 0; !encontrado && startY < 9; startY += 3) { // Iterate over the blocks, vertically
+               bool sinLlenar = false;
+               for (int i = startX; !sinLlenar && (i % 3 != 0 || i == startX); ++i) // Iterate over the current block
+                   for (int j = startY; !sinLlenar && (j % 3 != 0 || j == startY); ++j)
+                       sinLlenar = (tablero[(j*9)+ i] == 0);
+               encontrado = !sinLlenar;
+           }
+
+       return encontrado;
+}
+
+bool Generador::VerificarResolucion(bool UnaSolucion) {
+   bool solucionado;
+    if (esValido()) {
+        solucionado = escanearSolucion(); // Works on a copy of the original board
+
+        if (!UnaSolucion && !solucionado)
+            solucionado = BackTrackSolucion(0,0); // Will make use of things already done by ScanSolve()
+
+        return solucionado;
+    }
+    else
+        return false;
+}
+
+ bool Generador::Eliminar_Resolver(int realx, int realy){
+     bool salida = false;
+
+     if (tablero[(realx*9)+realy] == 0)
+             return false;
+
+         int value = tablero[(realx*9)+realy];
+         tablero[(realx*9)+realy]=0;
+         salida = (VerificarResolucion(true)); // ScanSolve() only
+         tablero[(realx*9)+realy]=value;
+         return salida;
+ }
 
 
 void Generador::GenerarTablero( int dificultad){
+    bool posibilidades;
 
+    lista_op=QList<Posicion>();
     tablero=(int*) malloc(sizeof(int)*81);
     for(int i=0;i<81;i++) tablero[i]=0;
     generarSolucionRandom();
+    do {
+           posibilidades = false; // We keep track of any removed elements in the last iteration
+           int y_rand = rand() % 9; // So we don't always start erasing the first few elements
+           int x_rand = rand() % 9;
+           for (int y = 0; y < 9; ++y)
+               for (int x = 0; x < 9; ++x) {
+                   int realx = (x + x_rand) % 9; // The real x and y positions
+                   int realy = (y + y_rand) % 9;
+                   if (tablero[(x*9)+y] != 0 && Eliminar_Resolver(realx, realy)) { // We want the board to be solvable by ScanSolve() only, so it has only 1 solution
+                       qDebug()<<"entro";
+                       Posicion pe((realx*9)+realy, tablero[(realx*9)+realy]);
+                       lista_op.push_back(pe);
+                       tablero[(x*9)+y]=0;
+                       posibilidades = true;
+                   }
 
+               }
+       } while (!posibilidades);
+    int Insertar = GetInsertar(dificultad);
+
+       bool stillFoundOne = true;
+       pila= QStack<Posicion>();
+       while (Insertar > 0 && stillFoundOne) {
+           stillFoundOne = false;
+
+           int yoffset = rand() % 9; // So we don't always start erasing the first few elements
+           int xoffset = rand() % 9;
+
+           for (int y = 0; y < 9 && Insertar > 0 && !lista_op.empty(); ++y)
+               for (int x = 0; x < 9 && Insertar > 0 && !lista_op.empty(); ++x) {
+                   int realx = (x + xoffset) % 9; // The real x and y positions
+                   int realy = (y + yoffset) % 9;
+                   Posicion pe((realx*9)+realy, tablero[(realx*9)+realy]);
+                   pila.push(pe);
+                   tablero[(realx*9)+realy]=0; // Remove the element from the board and try to solve it again
+
+                   bool foundOne = false;
+                   for (QList<Posicion>::iterator it = lista_op.begin(); it != lista_op.end() && !foundOne;) {
+                       tablero[it->GetPos()]=it->GetValor();
+                       if (VerificarResolucion(true)) { // Board is solvable by ScanSolve()
+                           Posicion addpos(it->GetPos(), it->GetValor());
+                           pila.push(addpos);
+
+                           it = lista_op.erase(it); // Remove from the undoList and add to the pila
+
+                           --Insertar;
+                           foundOne = true;
+                           stillFoundOne = true;
+                       }
+                       else
+                           it++;
+
+                       tablero[(realx*9)+realy]=0; // Removed in BOTH CASES!
+
+                       if (!foundOne && !pila.empty()) {
+                           tablero[pila.top().GetPos()]=pila.top().GetValor();
+                           pila.pop();
+                       }
+                   }
+               }
+       }
+
+       if (Insertar > 0 || !EstaLlenoTablero()) // We don't want the board to contain filled in blocks/rows/columns
+           GenerarTablero(dificultad);
+       // This is much faster than checking and removing to keep the current level!
+       else {
+           while (!pila.empty()) {
+               tablero[pila.top().GetPos()]=pila.top().GetValor();
+               pila.pop();
+           }
+
+           // To remove extra elements if level > 5, THIS IS NOT BEING USED AT THIS MOMENT!
+           for (int i = 0; i > Insertar; --i) {
+               int randx = rand() % 9;
+               int randy = rand() % 9;
+               if (tablero[(randx*9)+randy] != 0)
+                   tablero[(randx*9)+randy]=0;
+               else
+                   ++i;
+           }
+       }
 }
 
