@@ -10,17 +10,32 @@ Generador::Generador(void)
 Generador::~Generador(void)
 {
 }
-void Generador::generarCasillasVisibles(){
+void Generador::generarCasillasVisibles(int dificultad){
     srand((unsigned int) time(NULL));
     int x, y, num_de_Random;
     casillas_visibles =new bool[81];
-            num_de_Random = 50;
+    if(dificultad==1){
+        qDebug()<<"1";
+        num_de_Random=50;
+    }else if(dificultad==2){
+        num_de_Random=45;
+        qDebug()<<"2";
+    }else if(dificultad==3){
+    num_de_Random=40;
+
+    }
+
+
             for(int i=0;i<81;i++)casillas_visibles[i]=false;
 
             for (int i = 0; i < num_de_Random; ++i) {
+
                 x = rand() % 9;
                 y = rand() % 9;
+                if(!casillas_visibles[(x*9)+y])
                 casillas_visibles[(x*9)+y]=true;
+                else
+                    i--;
                 x=y=0;
             }
 }

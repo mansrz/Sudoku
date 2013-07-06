@@ -84,7 +84,8 @@ void MainWindow::on_btnLlenar_clicked()
     int i,j;
 
     generador->GenerarTablero(num_dificultad);
-    generador->generarCasillasVisibles();
+
+    generador->generarCasillasVisibles(num_dificultad);
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){

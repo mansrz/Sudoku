@@ -40,7 +40,16 @@ public:
 	@return Genera el tablero con solucion
 	
     */
+    /**
+     * @brief GenerarTablero
+     * @param dificultad el nivel de dificultad
+     */
     void GenerarTablero(int dificultad);
+    /**
+    * @brief GetInsertar
+    * @param dificultad el nivel de dificultad
+    * @return retorna el valor que se debe reinsertar
+    */
    int GetInsertar(int dificultad) ;
 
 
@@ -56,28 +65,47 @@ public:
     * @return Escanea posible solucion del tablero.
     */
     bool escanearSolucion();
-    void generarCasillasVisibles();
+    /**
+     * @brief generarCasillasVisibles
+     *@param Dificultad el nivel de dificultad
+     */
+    void generarCasillasVisibles(int dificultad);
     int *tablero;
     bool *casillas_visibles;
     QList<Posicion> lista_op;
     QStack<Posicion> pila;
 
  private:
+    /**
+     * @brief EstaLlenoTablero
+     * @return Retoran si esta lleno el tablero
+     */
     bool EstaLlenoTablero();
+    /**
+     * @brief VerificarResolucion
+     * @param UnaSolucion un valor de verdad de que tenga una solucion
+     * @return
+     */
     bool VerificarResolucion(bool UnaSolucion);
+    /**
+     * @brief Eliminar_Resolver
+     * @param realx Posicion en x para eliminar
+     * @param realy Posicion en Y para eliminar
+     * @return
+     */
     bool Eliminar_Resolver(int realx, int realy);
     /**
     * BackTrackSolucion
-    * @param startx
-    * @param starty
-    * @return Algoritmo para poder llenar espacios vacios del tablero
+    * @param startx Posicion en x para realizar el backtracking(O)
+    * @param starty Posicion en y para realizar el backtracking(O)
+    * @return Retorna el valor de verdad si es que se pudo resolver el tablero
     */
     bool BackTrackSolucion(int startx, int starty);
 
 
     /**
     * esCompleto
-    * @return Verifica si hay un 0 en el tablero.
+    * @return Valor de verdad si hay un 0 en el tablero.
     */
     bool esCompleto();
 
@@ -90,8 +118,8 @@ public:
 
 
     /**
-    * generarSolucionRandom
-    */
+     * @brief generarSolucionRandom
+     */
     void generarSolucionRandom();
 
 
