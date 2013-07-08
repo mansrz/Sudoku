@@ -15,15 +15,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     numero.cpp \
-    generador.cpp
+    generador.cpp \
+    mejorestiempos.cpp
 
 HEADERS  += mainwindow.h \
     numero.h \
-    Dimensiones.h \
     generador.h \
-    Posicion.h
+    Posicion.h \
+    puntaje.h \
+    mejorestiempos.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    mejorestiempos.ui
 
 OTHER_FILES += \
     savedGame.txt

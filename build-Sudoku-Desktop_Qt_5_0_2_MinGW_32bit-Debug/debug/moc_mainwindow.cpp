@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[15];
-    char stringdata[279];
+    char stringdata[280];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,7 +43,7 @@ QT_MOC_LITERAL(10, 126, 23),
 QT_MOC_LITERAL(11, 150, 34),
 QT_MOC_LITERAL(12, 185, 24),
 QT_MOC_LITERAL(13, 210, 33),
-QT_MOC_LITERAL(14, 244, 33)
+QT_MOC_LITERAL(14, 244, 34)
     },
     "MainWindow\0on_btnLlenar_clicked\0\0"
     "obtenerCasilla\0n\0cambiarNumero\0"
@@ -53,7 +53,7 @@ QT_MOC_LITERAL(14, 244, 33)
     "on_actionGuardar_partida_triggered\0"
     "on_actionSalir_triggered\0"
     "on_actionCargar_partida_triggered\0"
-    "on_dificultad_currentIndexChanged\0"
+    "on_actionMejores_tiempos_triggered\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,7 +81,7 @@ static const uint qt_meta_data_MainWindow[] = {
       11,    0,   82,    2, 0x08,
       12,    0,   83,    2, 0x08,
       13,    0,   84,    2, 0x08,
-      14,    1,   85,    2, 0x08,
+      14,    0,   85,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void,
@@ -94,7 +94,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    7,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -114,7 +114,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->on_actionGuardar_partida_triggered(); break;
         case 8: _t->on_actionSalir_triggered(); break;
         case 9: _t->on_actionCargar_partida_triggered(); break;
-        case 10: _t->on_dificultad_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 10: _t->on_actionMejores_tiempos_triggered(); break;
         default: ;
         }
     }

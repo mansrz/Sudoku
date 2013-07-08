@@ -41,6 +41,7 @@ public:
     QAction *actionSalir;
     QAction *actionAyuda;
     QAction *actionAcerca_de;
+    QAction *actionMejores_tiempos;
     QWidget *centralWidget;
     QWidget *gridLayoutWidget;
     QGridLayout *gridTablero;
@@ -65,7 +66,7 @@ public:
     QPushButton *btnAyuda;
     QLCDNumber *lcdNumber;
     QPushButton *btnFinalizar;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *lblDificultad;
     QComboBox *cboDificultad;
@@ -92,6 +93,8 @@ public:
         actionAyuda->setObjectName(QStringLiteral("actionAyuda"));
         actionAcerca_de = new QAction(MainWindow);
         actionAcerca_de->setObjectName(QStringLiteral("actionAcerca_de"));
+        actionMejores_tiempos = new QAction(MainWindow);
+        actionMejores_tiempos->setObjectName(QStringLiteral("actionMejores_tiempos"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
@@ -223,20 +226,20 @@ public:
         btnFinalizar->setObjectName(QStringLiteral("btnFinalizar"));
         btnFinalizar->setEnabled(false);
         btnFinalizar->setGeometry(QRect(630, 300, 75, 23));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(550, 80, 161, 21));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(550, 80, 161, 22));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        lblDificultad = new QLabel(widget);
+        lblDificultad = new QLabel(layoutWidget);
         lblDificultad->setObjectName(QStringLiteral("lblDificultad"));
 
         horizontalLayout->addWidget(lblDificultad);
 
-        cboDificultad = new QComboBox(widget);
+        cboDificultad = new QComboBox(layoutWidget);
         cboDificultad->setObjectName(QStringLiteral("cboDificultad"));
         cboDificultad->setStyleSheet(QStringLiteral("color: qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 147), stop:0.497326 rgba(0, 0, 0, 147), stop:1 rgba(0, 169, 255, 147));"));
 
@@ -263,6 +266,7 @@ public:
         menuMenu->addAction(actionNueva_partida);
         menuMenu->addAction(actionGuardar_partida);
         menuMenu->addAction(actionCargar_partida);
+        menuMenu->addAction(actionMejores_tiempos);
         menuMenu->addAction(actionSalir);
         menuAyuda->addAction(actionAyuda);
         menuAyuda->addSeparator();
@@ -282,6 +286,7 @@ public:
         actionSalir->setText(QApplication::translate("MainWindow", "Salir", 0));
         actionAyuda->setText(QApplication::translate("MainWindow", "Ayuda", 0));
         actionAcerca_de->setText(QApplication::translate("MainWindow", "Acerca de", 0));
+        actionMejores_tiempos->setText(QApplication::translate("MainWindow", "Mejores tiempos", 0));
         gbOpciones->setTitle(QApplication::translate("MainWindow", "Opciones", 0));
         chkAlerta1->setText(QApplication::translate("MainWindow", "Alerta jugadas invalidas", 0));
         chkAlerta2->setText(QApplication::translate("MainWindow", "Alerta jugadas incorrectas", 0));

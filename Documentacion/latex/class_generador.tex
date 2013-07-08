@@ -9,15 +9,28 @@
 virtual \hyperlink{class_generador_a088aa3e97fb0a1e13b168c362485e7c8}{$\sim$\-Generador} (void)
 \item 
 void \hyperlink{class_generador_ab67862d2f13c1e9b18b29b385bf5a20e}{Generar\-Tablero} (int dificultad)
-\item 
+\begin{DoxyCompactList}\small\item\em Generar\-Tablero. \end{DoxyCompactList}\item 
+int \hyperlink{class_generador_a2c233f259d61ca15ca1130518ff44004}{Get\-Insertar} (int dificultad)
+\begin{DoxyCompactList}\small\item\em Get\-Insertar. \end{DoxyCompactList}\item 
 bool \hyperlink{class_generador_a430dccdbfe57088212912c30259f8757}{resolver\-Tablero} ()
 \item 
 bool \hyperlink{class_generador_a0e8bb058054de56ece51fc880a23fd07}{escanear\-Solucion} ()
-\end{DoxyCompactItemize}
+\item 
+void \hyperlink{class_generador_a07bf7d13a36ad3fd7c11355f5b84cde5}{generar\-Casillas\-Visibles} (int dificultad)
+\begin{DoxyCompactList}\small\item\em generar\-Casillas\-Visibles \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{class_generador_ab990ce2cbce0dcf52b0ed827545e0b16}{int $\ast$ {\bfseries tablero}}\label{class_generador_ab990ce2cbce0dcf52b0ed827545e0b16}
+
+\item 
+\hypertarget{class_generador_a6cf309cf64afd7e9e747e7a66a4f4727}{bool $\ast$ {\bfseries casillas\-\_\-visibles}}\label{class_generador_a6cf309cf64afd7e9e747e7a66a4f4727}
+
+\item 
+\hypertarget{class_generador_abc312596e3aadf116f09238ab1bbd1cf}{Q\-List$<$ \hyperlink{class_posicion}{Posicion} $>$ {\bfseries lista\-\_\-op}}\label{class_generador_abc312596e3aadf116f09238ab1bbd1cf}
+
+\item 
+\hypertarget{class_generador_a44d110af005ba98c46d18ace79d9f930}{Q\-Stack$<$ \hyperlink{class_posicion}{Posicion} $>$ {\bfseries pila}}\label{class_generador_a44d110af005ba98c46d18ace79d9f930}
 
 \end{DoxyCompactItemize}
 
@@ -48,8 +61,24 @@ $\sim$\-Generador Destructor
 \end{DoxyParamCaption}
 )}}\label{class_generador_a0e8bb058054de56ece51fc880a23fd07}
 escanear\-Solucion \begin{DoxyReturn}{Returns}
-Verdadero si la jugada es valida, falso si no lo es. 
+Escanea posible solucion del tablero. 
 \end{DoxyReturn}
+\hypertarget{class_generador_a07bf7d13a36ad3fd7c11355f5b84cde5}{\index{Generador@{Generador}!generar\-Casillas\-Visibles@{generar\-Casillas\-Visibles}}
+\index{generar\-Casillas\-Visibles@{generar\-Casillas\-Visibles}!Generador@{Generador}}
+\subsubsection[{generar\-Casillas\-Visibles}]{\setlength{\rightskip}{0pt plus 5cm}void Generador\-::generar\-Casillas\-Visibles (
+\begin{DoxyParamCaption}
+\item[{int}]{dificultad}
+\end{DoxyParamCaption}
+)}}\label{class_generador_a07bf7d13a36ad3fd7c11355f5b84cde5}
+
+
+generar\-Casillas\-Visibles 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Dificultad} & el nivel de dificultad \\
+\hline
+\end{DoxyParams}
 \hypertarget{class_generador_ab67862d2f13c1e9b18b29b385bf5a20e}{\index{Generador@{Generador}!Generar\-Tablero@{Generar\-Tablero}}
 \index{Generar\-Tablero@{Generar\-Tablero}!Generador@{Generador}}
 \subsubsection[{Generar\-Tablero}]{\setlength{\rightskip}{0pt plus 5cm}void Generador\-::\-Generar\-Tablero (
@@ -57,11 +86,42 @@ Verdadero si la jugada es valida, falso si no lo es.
 \item[{int}]{dificultad}
 \end{DoxyParamCaption}
 )}}\label{class_generador_ab67862d2f13c1e9b18b29b385bf5a20e}
+
+
+Generar\-Tablero. 
+
 Generar\-Tablero 
 \begin{DoxyParams}{Parameters}
 {\em dificultad} & \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Genera el tablero con solucion 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em dificultad} & el nivel de dificultad \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_generador_a2c233f259d61ca15ca1130518ff44004}{\index{Generador@{Generador}!Get\-Insertar@{Get\-Insertar}}
+\index{Get\-Insertar@{Get\-Insertar}!Generador@{Generador}}
+\subsubsection[{Get\-Insertar}]{\setlength{\rightskip}{0pt plus 5cm}int Generador\-::\-Get\-Insertar (
+\begin{DoxyParamCaption}
+\item[{int}]{dificultad}
+\end{DoxyParamCaption}
+)}}\label{class_generador_a2c233f259d61ca15ca1130518ff44004}
+
+
+Get\-Insertar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dificultad} & el nivel de dificultad \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+retorna el valor que se debe reinsertar 
+\end{DoxyReturn}
 \hypertarget{class_generador_a430dccdbfe57088212912c30259f8757}{\index{Generador@{Generador}!resolver\-Tablero@{resolver\-Tablero}}
 \index{resolver\-Tablero@{resolver\-Tablero}!Generador@{Generador}}
 \subsubsection[{resolver\-Tablero}]{\setlength{\rightskip}{0pt plus 5cm}bool Generador\-::resolver\-Tablero (
@@ -70,11 +130,11 @@ Generar\-Tablero
 \end{DoxyParamCaption}
 )}}\label{class_generador_a430dccdbfe57088212912c30259f8757}
 resolver\-Tablero \begin{DoxyReturn}{Returns}
-Verdadero si , falso si no lo es. 
+Resuelve el tablero de una manera mas superficial. 
 \end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-Sudoku/\hyperlink{generador_8h}{generador.\-h}\item 
-Sudoku/generador.\-cpp\end{DoxyCompactItemize}
+C\-:/\-Users/user/\-Documents/\-Git\-Hub/\-Sudoku/\-Sudoku/\hyperlink{generador_8h}{generador.\-h}\item 
+C\-:/\-Users/user/\-Documents/\-Git\-Hub/\-Sudoku/\-Sudoku/generador.\-cpp\end{DoxyCompactItemize}

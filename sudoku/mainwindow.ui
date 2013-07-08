@@ -369,6 +369,7 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
     <addaction name="actionNueva_partida"/>
     <addaction name="actionGuardar_partida"/>
     <addaction name="actionCargar_partida"/>
+    <addaction name="actionMejores_tiempos"/>
     <addaction name="actionSalir"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
@@ -419,6 +420,11 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
   <action name="actionAcerca_de">
    <property name="text">
     <string>Acerca de</string>
+   </property>
+  </action>
+  <action name="actionMejores_tiempos">
+   <property name="text">
+    <string>Mejores tiempos</string>
    </property>
   </action>
  </widget>

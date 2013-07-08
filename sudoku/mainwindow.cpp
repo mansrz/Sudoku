@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     texto=new QString();
 
     generador=new Generador();
+
+    mejoresTiempos = new MejoresTiempos(this);
 }
 
 MainWindow::~MainWindow()
@@ -174,9 +176,11 @@ void MainWindow::updateTimer()
     milisegundos = (msegActual - msegInicial);
 
     QTime *time = new QTime(0,minutos,segundos,milisegundos);
-    QString text = time->toString("mm:ss.zzz");
+    textTiempo = time->toString("mm:ss.zzz");
 
-    ui->lcdNumber->display(text);
+    valorTiempo = milisegundos + segundos*1000 + minutos *60000;
+
+    ui->lcdNumber->display(textTiempo);
 }
 
 bool MainWindow::jugadaValida(int casilla, int valor){
@@ -244,7 +248,7 @@ void MainWindow::on_btnAyuda_clicked()
     }*/
 
     //nik: solo permite usar una vez la ayuda
-    ui->btnAyuda->setEnabled(false);
+    //ui->btnAyuda->setEnabled(false);
     ayudaUsada=true;
 
 }
@@ -256,10 +260,89 @@ void MainWindow::on_btnFinalizar_clicked()
     for(i=0; i<81; i++){
         if (!jugadaCorrecta(i)){
             qDebug()<<"Ha perdido";
+            QMessageBox::information(this,"Sudoku","Ha perdido.");
             return;
         }
     }
+    nombre = QInputDialog::getText(this,"Sudoku","Ha ganado. Ingrese su nombre para registrarlo en los mejores puntajes");
+
+    //puntajeJugador = new Puntaje (1,nombre, textTiempo,valorTiempo);
+
+    mejoresTiempos->cargarTiempos();
+
+    verificarPuntaje();
+
+    mejoresTiempos->guardarTiempos();
+    mejoresTiempos->cargarTiemposTabla();
+
+    mejoresTiempos->show();
+
+
     qDebug()<<"Ha ganado, guardar puntaje";
+}
+
+
+void MainWindow::verificarPuntaje(){
+    int i,j=1;
+    Puntaje *temp1, *temp2;
+    qDebug()<<valorTiempo;
+
+    if (num_dificultad==1){
+        for(i=0;i<5;i++){
+            if (mejoresTiempos->listPrincipiante[i]->getValor()>valorTiempo){
+                qDebug()<<"mejor puntaje";
+                qDebug()<<i;
+                temp1 = new Puntaje(1,mejoresTiempos->listPrincipiante[i]->getNombre(),mejoresTiempos->listPrincipiante[i]->getTiempo(),mejoresTiempos->listPrincipiante[i]->getValor());
+                mejoresTiempos->listPrincipiante[i]->setValores(1,nombre,textTiempo,valorTiempo);
+
+                for(j=1;i+j<5;j++){
+                    temp2=new Puntaje(1,mejoresTiempos->listPrincipiante[i+j]->getNombre(),mejoresTiempos->listPrincipiante[i+j]->getTiempo(),mejoresTiempos->listPrincipiante[j+i]->getValor());
+                    mejoresTiempos->listPrincipiante[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
+                    temp1->setValores(1,mejoresTiempos->listPrincipiante[i+j]->getNombre(),mejoresTiempos->listPrincipiante[i+j]->getTiempo(),mejoresTiempos->listPrincipiante[j+i]->getValor());
+                }
+
+                qDebug()<<mejoresTiempos->listPrincipiante[i]->getNombre();
+                return;
+            }
+        }
+    }/*else if(num_dificultad ==2){
+        qDebug()<<"intermedio";
+        for(i=0;i<5;i++){
+            if (2,mejoresTiempos->listIntermedio[i]->getValor()>valorTiempo){
+                qDebug()<<"intermedio mejor";
+                temp1 = mejoresTiempos->listIntermedio[i];
+                mejoresTiempos->listIntermedio[i] = puntajeJugador;
+                while (i+j<5){
+                    temp2=mejoresTiempos->listIntermedio[i+j];
+                    mejoresTiempos->listIntermedio[i+j-1]=temp1;
+                    temp1=temp2;
+                    j++;
+                }
+                //return;
+
+            }
+        }
+    }else{
+        qDebug()<<"avanzado";
+        for(i=0;i<5;i++){
+            if (3,mejoresTiempos->listAvanzado[i]->getValor()>valorTiempo){
+                qDebug()<<"avanzado mejor";
+                temp1 = mejoresTiempos->listAvanzado[i];
+                mejoresTiempos->listAvanzado[i] = puntajeJugador;
+                while (i+j<5){
+                    temp2=mejoresTiempos->listAvanzado[i+j];
+                    mejoresTiempos->listAvanzado[i+j-1]=temp1;
+                    temp1=temp2;
+                    j++;
+                }
+                return;
+            }
+        }
+    }*/
+
+
+
+
 }
 
 void MainWindow::on_actionGuardar_partida_triggered()
@@ -349,3 +432,8 @@ void MainWindow::on_actionCargar_partida_triggered()
 }
 
 
+
+void MainWindow::on_actionMejores_tiempos_triggered()
+{
+    mejoresTiempos->show();
+}

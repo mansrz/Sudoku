@@ -26,6 +26,10 @@
 #include "numero.h"
 #include "generador.h"
 #include <QKeyEvent>
+#include <mejorestiempos.h>
+#include <QMessageBox>
+#include <QInputDialog>
+#include <puntaje.h>
 
 namespace Ui {
 class MainWindow;
@@ -89,6 +93,18 @@ public:
     * ~MainWindow Destructor de la clase MainWindow
     */
     ~MainWindow();
+
+    /**
+    * cargarTiempos Carga los mejores tiempos desde archivo
+    */
+    void cargarTiempos();
+
+    /**
+    * guardarTiempos Guarda los mejores tiempos en el archivo
+    */
+    void guardarTiempos();
+
+    void verificarPuntaje();
 
 
 private slots:
@@ -156,10 +172,7 @@ private slots:
     */
     void on_actionCargar_partida_triggered();
 
-
-
-
-
+    void on_actionMejores_tiempos_triggered();
 
 private:
     int casilla=-1;
@@ -176,6 +189,13 @@ private:
     QTimer *timer;
     QTime timeInicial;
     Generador *generador;
+    QString nombre,textTiempo;
+    int valorTiempo;
+    Puntaje *puntajeJugador;
+    MejoresTiempos *mejoresTiempos;
+    Puntaje *listPrincipiante[5];
+    Puntaje *listIntermedio[5];
+    Puntaje *listAvanzado[5];
 
 };
 
