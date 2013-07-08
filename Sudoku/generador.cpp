@@ -46,11 +46,11 @@ void Generador::generarCasillasVisibles(int dificultad){
 
 bool Generador::BackTrackSolucion(int startx, int starty){
 
-    bool solved = esCompleto(); // If we are at a leaf we have to return true, because the board is filled
+    bool solved = esCompleto();
     bool foundzero = false;
     int x = startx, y;
 
-    for (y = starty; !solved && !foundzero && y < 9; ++y) { // Find the first element that is not filled in (we are working recursively)
+    for (y = starty; !solved && !foundzero && y < 9; ++y) {
         for (x = startx; !foundzero && x < 9; ++x){
             foundzero = (tablero[(x*9)+y] == 0);}
         startx = 0;
@@ -58,7 +58,7 @@ bool Generador::BackTrackSolucion(int startx, int starty){
    x--;
    y--;
 
-    if (!solved && foundzero) { // Only if there is a 0 found we can still backtrack, else: end this recursion
+    if (!solved && foundzero) {
         for (int e = 1; e < 10 && !solved; ++e){
 
             if (MovimientoValido(x, y, e)) {
@@ -128,7 +128,7 @@ bool Generador::ChequearBloque(int x, int y, int v){
     startx = x-(x % 3);
     starty =y- (y % 3);
 
-    for (int i = starty; valido && (i % 3 != 0 || i == starty); i++) {// While not in the next block, and not at end of the board
+    for (int i = starty; valido && (i % 3 != 0 || i == starty); i++) {
         for (int j = startx; valido && (j % 3 != 0 || j == startx); j++){
             valido = (tablero[(j*9)+i] != v);
 
@@ -141,11 +141,12 @@ bool Generador::ChequearBloque(int x, int y, int v){
 int Generador::GetInsertar(int dificultad) {
 
     if(dificultad<4)
-        return 1+rand()%5;
-    else if(dificultad==5)
         return 0;
+    else if(dificultad==5)
+
+    return 1+rand()%5;
     else
-        return (-1)*(2+rand()%4);
+        return (4+rand()%8);
 
 }
 
@@ -154,17 +155,17 @@ bool Generador::ValidarHorizontal(){
     bool elementosHorizontales[10];
     bool valido = true;
 
-     // Iterate over the different rows of the board
-        for (int j = 0; j < 10; ++j) // Initialize the boolean array
+
+        for (int j = 0; j < 10; ++j)
             elementosHorizontales[j] = false;
         for (int i = 0; valido && i < 9; ++i) {
-        for (int j = 0; valido && j < 9; ++j) {// Iterate over the current row
+        for (int j = 0; valido && j < 9; ++j) {
             int curElem = tablero[(j*9)+i];
-            valido = !elementosHorizontales[curElem]; // Board is still valid if element hasn't occured yet
+            valido = !elementosHorizontales[curElem];
             if (curElem != 0)
                 elementosHorizontales[curElem] = true;
         }
-        for (int j = 0; j < 10; ++j) // Initialize the boolean array
+        for (int j = 0; j < 10; ++j)
             elementosHorizontales[j] = false;
     }
 
@@ -175,18 +176,18 @@ bool Generador::ValidarVertical() {
     bool elementosVerticales[10];
     bool valido = true;
 
-// Iterate over the different columns of the board
-        for (int j = 0; j < 10; j++) // Initialize the boolean array
+
+        for (int j = 0; j < 10; j++)
             elementosVerticales[j] = false;
 
     for (int i = 0; valido && i < 9; ++i) {
-        for (int j = 0; valido && j < 9; ++j) {// Iterate over the current column
+        for (int j = 0; valido && j < 9; ++j) {
             int curElem = tablero[(i*9)+j];
-            valido = !elementosVerticales[curElem]; // Board is still valid if element hasn't occured yet
+            valido = !elementosVerticales[curElem];
             if (curElem != 0)
                 elementosVerticales[curElem] = true;
         }
-          for (int k = 0; k < 10; k++) // Initialize the boolean array
+          for (int k = 0; k < 10; k++)
             elementosVerticales[k] = false;
     }
 
@@ -197,20 +198,20 @@ bool Generador::ValidarBloque() {
     bool elementosBloque[10];
     bool valido = true;
 
- // Iterate over the blocks, vertically
-            for (int j = 0; j < 10; ++j) // Initialize the boolean array
+
+            for (int j = 0; j < 10; ++j)
                 elementosBloque[j] = false;
-                for (int startX = 0; valido && startX < 9; startX += 3){ // Iterate over the blocks, horizontally
+                for (int startX = 0; valido && startX < 9; startX += 3){
         for (int startY = 0; valido && startY < 9; startY += 3) {
-            for (int i = startX; valido && (i % 3 != 0 || i == startX); ++i){ // Iterate over the current block
+            for (int i = startX; valido && (i % 3 != 0 || i == startX); ++i){
                 for (int j = startY; valido && (j % 3 != 0 || j == startY); ++j) {
                     int curElem = tablero[(j*9)+i];
-                    valido = !elementosBloque[curElem]; // Board is still valid if element hasn't occured yet
+                    valido = !elementosBloque[curElem];
                     if (curElem != 0)
                         elementosBloque[curElem] = true;
                 }
             }
-                for (int j = 0; j < 10; ++j) // Initialize the boolean array
+                for (int j = 0; j < 10; ++j)
                 elementosBloque[j] = false;
 
         }
@@ -226,25 +227,25 @@ void Generador::Set(int x, int y, int v ){
 
 bool Generador::escanearSolucion(){
 
-    bool encontrado = esValido(); //Only enter the filling loop if the board is valid
+    bool encontrado = esValido();
     int numPossible;
-    bool possibleSolutions[9][9][10]; // 10 to avoid confusion (element 0 is always false)
-    for (int y = 0; y < 9; ++y) // Preparation; set all element 0's to false, and all the rest to true
+    bool possibleSolutions[9][9][10];
+    for (int y = 0; y < 9; ++y)
         for (int x = 0; x < 9; ++x) {
             possibleSolutions[x][y][0] = false;
             for (int v = 1; v < 10; ++v)
                 possibleSolutions[x][y][v] = true;
         }
 
-        while (!esCompleto() && encontrado) { // While we still encontrado possible moves
-        encontrado = false; // In encontrado we keep if we have filled in an element
+        while (!esCompleto() && encontrado) {
+        encontrado = false;
         for (int y = 0; y < 9; ++y)
             for (int x = 0; x < 9; ++x) {
-                numPossible = 0; // We keep the number of possibilities
-                for (int v = 1; v < 10; ++v) { // Looking for possible solutions per box
-                    if (possibleSolutions[x][y][v]) { // If it hasn't already been marked as impossible (we're working incrementally)
+                numPossible = 0;
+                for (int v = 1; v < 10; ++v) {
+                    if (possibleSolutions[x][y][v]) {
                         possibleSolutions[x][y][v] = MovimientoValido(x, y, v);
-                        if (possibleSolutions[x][y][v]) // If it is still a valid move
+                        if (possibleSolutions[x][y][v])
                             ++numPossible;
                     }
                 }
@@ -331,10 +332,10 @@ bool Generador::EstaLlenoTablero(){
 bool Generador::VerificarResolucion(bool UnaSolucion) {
    bool solucionado;
     if (esValido()) {
-        solucionado = escanearSolucion(); // Works on a copy of the original board
+        solucionado = escanearSolucion();
 
         if (!UnaSolucion && !solucionado)
-            solucionado = BackTrackSolucion(0,0); // Will make use of things already done by ScanSolve()
+            solucionado = BackTrackSolucion(0,0);
 
         return solucionado;
     }
@@ -350,7 +351,7 @@ bool Generador::VerificarResolucion(bool UnaSolucion) {
 
          int value = tablero[(realx*9)+realy];
          tablero[(realx*9)+realy]=0;
-         salida = (VerificarResolucion(true)); // ScanSolve() only
+         salida = (VerificarResolucion(true));
          tablero[(realx*9)+realy]=value;
          return salida;
  }
@@ -364,14 +365,14 @@ void Generador::GenerarTablero( int dificultad){
     for(int i=0;i<81;i++) tablero[i]=0;
     generarSolucionRandom();
     do {
-           posibilidades = false; // We keep track of any removed elements in the last iteration
-           int y_rand = rand() % 9; // So we don't always start erasing the first few elements
+           posibilidades = false;
+           int y_rand = rand() % 9;
            int x_rand = rand() % 9;
            for (int y = 0; y < 9; ++y)
                for (int x = 0; x < 9; ++x) {
-                   int realx = (x + x_rand) % 9; // The real x and y positions
+                   int realx = (x + x_rand) % 9;
                    int realy = (y + y_rand) % 9;
-                   if (tablero[(x*9)+y] != 0 && Eliminar_Resolver(realx, realy)) { // We want the board to be solvable by ScanSolve() only, so it has only 1 solution
+                   if (tablero[(x*9)+y] != 0 && Eliminar_Resolver(realx, realy)) {
 
                        Posicion pe((realx*9)+realy, tablero[(realx*9)+realy]);
                        lista_op.push_back(pe);
@@ -388,25 +389,25 @@ void Generador::GenerarTablero( int dificultad){
        while (Insertar > 0 && stillFoundOne) {
            stillFoundOne = false;
 
-           int yoffset = rand() % 9; // So we don't always start erasing the first few elements
+           int yoffset = rand() % 9;
            int xoffset = rand() % 9;
 
            for (int y = 0; y < 9 && Insertar > 0 && !lista_op.empty(); ++y)
                for (int x = 0; x < 9 && Insertar > 0 && !lista_op.empty(); ++x) {
-                   int realx = (x + xoffset) % 9; // The real x and y positions
+                   int realx = (x + xoffset) % 9;
                    int realy = (y + yoffset) % 9;
                    Posicion pe((realx*9)+realy, tablero[(realx*9)+realy]);
                    pila.push(pe);
-                   tablero[(realx*9)+realy]=0; // Remove the element from the board and try to solve it again
+                   tablero[(realx*9)+realy]=0;
 
                    bool foundOne = false;
                    for (QList<Posicion>::iterator it = lista_op.begin(); it != lista_op.end() && !foundOne;) {
                        tablero[it->GetPos()]=it->GetValor();
-                       if (VerificarResolucion(true)) { // Board is solvable by ScanSolve()
+                       if (VerificarResolucion(true)) {
                            Posicion addpos(it->GetPos(), it->GetValor());
                            pila.push(addpos);
 
-                           it = lista_op.erase(it); // Remove from the undoList and add to the pila
+                           it = lista_op.erase(it);
 
                            --Insertar;
                            foundOne = true;
@@ -415,7 +416,7 @@ void Generador::GenerarTablero( int dificultad){
                        else
                            it++;
 
-                       tablero[(realx*9)+realy]=0; // Removed in BOTH CASES!
+                       tablero[(realx*9)+realy]=0;
 
                        if (!foundOne && !pila.empty()) {
                            tablero[pila.top().GetPos()]=pila.top().GetValor();
@@ -425,16 +426,16 @@ void Generador::GenerarTablero( int dificultad){
                }
        }
 
-       if (Insertar > 0 || !EstaLlenoTablero()) // We don't want the board to contain filled in blocks/rows/columns
+       if (Insertar > 0 || !EstaLlenoTablero())
            GenerarTablero(dificultad);
-       // This is much faster than checking and removing to keep the current level!
+
        else {
            while (!pila.empty()) {
                tablero[pila.top().GetPos()]=pila.top().GetValor();
                pila.pop();
            }
 
-           // To remove extra elements if level > 5, THIS IS NOT BEING USED AT THIS MOMENT!
+
            for (int i = 0; i > Insertar; --i) {
                int randx = rand() % 9;
                int randy = rand() % 9;
