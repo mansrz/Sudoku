@@ -290,55 +290,52 @@ void MainWindow::verificarPuntaje(){
     if (num_dificultad==1){
         for(i=0;i<5;i++){
             if (mejoresTiempos->listPrincipiante[i]->getValor()>valorTiempo){
-                qDebug()<<"mejor puntaje";
-                qDebug()<<i;
                 temp1 = new Puntaje(1,mejoresTiempos->listPrincipiante[i]->getNombre(),mejoresTiempos->listPrincipiante[i]->getTiempo(),mejoresTiempos->listPrincipiante[i]->getValor());
                 mejoresTiempos->listPrincipiante[i]->setValores(1,nombre,textTiempo,valorTiempo);
 
-                for(j=1;i+j<5;j++){
+                /*for(j=1;i+j<5;j++){
                     temp2=new Puntaje(1,mejoresTiempos->listPrincipiante[i+j]->getNombre(),mejoresTiempos->listPrincipiante[i+j]->getTiempo(),mejoresTiempos->listPrincipiante[j+i]->getValor());
                     mejoresTiempos->listPrincipiante[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
                     temp1->setValores(1,mejoresTiempos->listPrincipiante[i+j]->getNombre(),mejoresTiempos->listPrincipiante[i+j]->getTiempo(),mejoresTiempos->listPrincipiante[j+i]->getValor());
-                }
+                }*/
 
                 qDebug()<<mejoresTiempos->listPrincipiante[i]->getNombre();
                 return;
             }
         }
-    }/*else if(num_dificultad ==2){
-        qDebug()<<"intermedio";
+    }else if(num_dificultad ==2){
         for(i=0;i<5;i++){
-            if (2,mejoresTiempos->listIntermedio[i]->getValor()>valorTiempo){
-                qDebug()<<"intermedio mejor";
-                temp1 = mejoresTiempos->listIntermedio[i];
-                mejoresTiempos->listIntermedio[i] = puntajeJugador;
-                while (i+j<5){
-                    temp2=mejoresTiempos->listIntermedio[i+j];
-                    mejoresTiempos->listIntermedio[i+j-1]=temp1;
-                    temp1=temp2;
-                    j++;
-                }
-                //return;
+            if (mejoresTiempos->listIntermedio[i]->getValor()>valorTiempo){
+                temp1 = new Puntaje(2,mejoresTiempos->listIntermedio[i]->getNombre(),mejoresTiempos->listIntermedio[i]->getTiempo(),mejoresTiempos->listIntermedio[i]->getValor());
+                mejoresTiempos->listIntermedio[i]->setValores(2,nombre,textTiempo,valorTiempo);
 
-            }
-        }
-    }else{
-        qDebug()<<"avanzado";
-        for(i=0;i<5;i++){
-            if (3,mejoresTiempos->listAvanzado[i]->getValor()>valorTiempo){
-                qDebug()<<"avanzado mejor";
-                temp1 = mejoresTiempos->listAvanzado[i];
-                mejoresTiempos->listAvanzado[i] = puntajeJugador;
-                while (i+j<5){
-                    temp2=mejoresTiempos->listAvanzado[i+j];
-                    mejoresTiempos->listAvanzado[i+j-1]=temp1;
-                    temp1=temp2;
-                    j++;
-                }
+                /*for(j=1;i+j<5;j++){
+                    temp2=new Puntaje(2,mejoresTiempos->listIntermedio[i+j]->getNombre(),mejoresTiempos->listIntermedio[i+j]->getTiempo(),mejoresTiempos->listIntermedio[j+i]->getValor());
+                    mejoresTiempos->listIntermedio[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
+                    temp1->setValores(2,mejoresTiempos->listIntermedio[i+j]->getNombre(),mejoresTiempos->listIntermedio[i+j]->getTiempo(),mejoresTiempos->listIntermedio[j+i]->getValor());
+                }*/
+
+                qDebug()<<mejoresTiempos->listIntermedio[i]->getNombre();
                 return;
             }
         }
-    }*/
+    }else{
+        for(i=0;i<5;i++){
+            if (mejoresTiempos->listAvanzado[i]->getValor()>valorTiempo){
+                temp1 = new Puntaje(3,mejoresTiempos->listAvanzado[i]->getNombre(),mejoresTiempos->listAvanzado[i]->getTiempo(),mejoresTiempos->listAvanzado[i]->getValor());
+                mejoresTiempos->listAvanzado[i]->setValores(3,nombre,textTiempo,valorTiempo);
+
+                /*for(j=1;i+j<5;j++){
+                    temp2=new Puntaje(3,mejoresTiempos->listAvanzado[i+j]->getNombre(),mejoresTiempos->listAvanzado[i+j]->getTiempo(),mejoresTiempos->listAvanzado[j+i]->getValor());
+                    mejoresTiempos->listAvanzado[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
+                    temp1->setValores(3,mejoresTiempos->listAvanzado[i+j]->getNombre(),mejoresTiempos->listAvanzado[i+j]->getTiempo(),mejoresTiempos->listAvanzado[j+i]->getValor());
+                }*/
+
+                qDebug()<<mejoresTiempos->listAvanzado[i]->getNombre();
+                return;
+            }
+        }
+    }
 
 
 
