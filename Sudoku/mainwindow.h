@@ -159,12 +159,6 @@ private slots:
 
 
 
-    /**
-     * on_dificultad_currentIndexChanged Da el valor para la dificultad
-     */
-    void on_dificultad_currentIndexChanged(const QString &arg1);
-
-
 
 
 private:

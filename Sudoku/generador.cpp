@@ -12,14 +12,16 @@ Generador::~Generador(void)
 }
 void Generador::generarCasillasVisibles(int dificultad){
     srand((unsigned int) time(NULL));
+
     int x, y, num_de_Random;
     casillas_visibles =new bool[81];
+
     if(dificultad==1){
-        qDebug()<<"1";
-        num_de_Random=50;
+
+        num_de_Random=45;
     }else if(dificultad==2){
         num_de_Random=45;
-        qDebug()<<"2";
+
     }else if(dificultad==3){
     num_de_Random=40;
 
@@ -34,10 +36,11 @@ void Generador::generarCasillasVisibles(int dificultad){
                 y = rand() % 9;
                 if(!casillas_visibles[(x*9)+y])
                 casillas_visibles[(x*9)+y]=true;
-                else
+                else{
                     i--;
+                }
                 x=y=0;
-            }
+   }
 }
 
 
@@ -369,7 +372,7 @@ void Generador::GenerarTablero( int dificultad){
                    int realx = (x + x_rand) % 9; // The real x and y positions
                    int realy = (y + y_rand) % 9;
                    if (tablero[(x*9)+y] != 0 && Eliminar_Resolver(realx, realy)) { // We want the board to be solvable by ScanSolve() only, so it has only 1 solution
-                       qDebug()<<"entro";
+
                        Posicion pe((realx*9)+realy, tablero[(realx*9)+realy]);
                        lista_op.push_back(pe);
                        tablero[(x*9)+y]=0;
@@ -441,5 +444,6 @@ void Generador::GenerarTablero( int dificultad){
                    ++i;
            }
        }
+       generarCasillasVisibles(dificultad);
 }
 

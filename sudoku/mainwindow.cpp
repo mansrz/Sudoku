@@ -82,10 +82,10 @@ void MainWindow::cambiarNumero(int n){
 void MainWindow::on_btnLlenar_clicked()
 {
     int i,j;
+    num_dificultad=1+ui->cboDificultad->currentIndex();
 
     generador->GenerarTablero(num_dificultad);
 
-    generador->generarCasillasVisibles(num_dificultad);
     //creacion de numeros
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
@@ -349,16 +349,3 @@ void MainWindow::on_actionCargar_partida_triggered()
 }
 
 
-
-void MainWindow::on_dificultad_currentIndexChanged(const QString &arg1)
-{
-    if(!arg1.compare("1 Facil")){
-          num_dificultad=1;
-    }else if(!arg1.compare("2 Intermedio")){
-        num_dificultad=2;
-    }else if(!arg1.compare("3 Dificil")){
-        num_dificultad=3;
-    }else{
-        num_dificultad=1;
-    }
-}
