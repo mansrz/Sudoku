@@ -14,11 +14,14 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -36,6 +39,8 @@ public:
     QAction *actionGuardar_partida;
     QAction *actionCargar_partida;
     QAction *actionSalir;
+    QAction *actionAyuda;
+    QAction *actionAcerca_de;
     QWidget *centralWidget;
     QWidget *gridLayoutWidget;
     QGridLayout *gridTablero;
@@ -60,8 +65,13 @@ public:
     QPushButton *btnAyuda;
     QLCDNumber *lcdNumber;
     QPushButton *btnFinalizar;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *lblDificultad;
+    QComboBox *cboDificultad;
     QMenuBar *menuBar;
     QMenu *menuMenu;
+    QMenu *menuAyuda;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -78,6 +88,10 @@ public:
         actionCargar_partida->setObjectName(QStringLiteral("actionCargar_partida"));
         actionSalir = new QAction(MainWindow);
         actionSalir->setObjectName(QStringLiteral("actionSalir"));
+        actionAyuda = new QAction(MainWindow);
+        actionAyuda->setObjectName(QStringLiteral("actionAyuda"));
+        actionAcerca_de = new QAction(MainWindow);
+        actionAcerca_de->setObjectName(QStringLiteral("actionAcerca_de"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
@@ -130,7 +144,8 @@ public:
 
         frameCuad6 = new QFrame(gridLayoutWidget);
         frameCuad6->setObjectName(QStringLiteral("frameCuad6"));
-        frameCuad6->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+        frameCuad6->setStyleSheet(QLatin1String("background-color: rgb(0, 255, 0);\n"
+"alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 41, 4, 255), stop:0.085 rgba(2, 79, 0, 255), stop:0.19 rgba(50, 147, 22, 255), stop:0.275 rgba(236, 191, 49, 255), stop:0.39 rgba(243, 61, 34, 255), stop:0.555 rgba(135, 81, 60, 255), stop:0.667 rgba(121, 75, 255, 255), stop:0.825 rgba(164, 255, 244, 255), stop:0.885 rgba(104, 222, 71, 255), stop:1 rgba(93, 128, 0, 255));"));
         frameCuad6->setFrameShape(QFrame::StyledPanel);
         frameCuad6->setFrameShadow(QFrame::Raised);
 
@@ -162,7 +177,7 @@ public:
 
         gbOpciones = new QGroupBox(centralWidget);
         gbOpciones->setObjectName(QStringLiteral("gbOpciones"));
-        gbOpciones->setGeometry(QRect(540, 60, 171, 111));
+        gbOpciones->setGeometry(QRect(540, 350, 171, 101));
         chkAlerta1 = new QCheckBox(gbOpciones);
         chkAlerta1->setObjectName(QStringLiteral("chkAlerta1"));
         chkAlerta1->setGeometry(QRect(10, 20, 141, 17));
@@ -177,17 +192,17 @@ public:
         chkPista->setGeometry(QRect(10, 80, 151, 17));
         btnLlenar = new QPushButton(centralWidget);
         btnLlenar->setObjectName(QStringLiteral("btnLlenar"));
-        btnLlenar->setGeometry(QRect(546, 180, 75, 23));
+        btnLlenar->setGeometry(QRect(590, 120, 75, 23));
         QFont font;
         font.setPointSize(8);
         btnLlenar->setFont(font);
         btnLlenar->setStyleSheet(QStringLiteral("border-color: none;"));
         gbNumeros = new QGroupBox(centralWidget);
         gbNumeros->setObjectName(QStringLiteral("gbNumeros"));
-        gbNumeros->setGeometry(QRect(550, 210, 151, 131));
+        gbNumeros->setGeometry(QRect(560, 170, 141, 121));
         gridLayoutWidget_2 = new QWidget(gbNumeros);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(10, 20, 131, 101));
+        gridLayoutWidget_2->setGeometry(QRect(10, 20, 121, 91));
         gridNumeros = new QGridLayout(gridLayoutWidget_2);
         gridNumeros->setSpacing(6);
         gridNumeros->setContentsMargins(11, 11, 11, 11);
@@ -196,23 +211,45 @@ public:
         btnAyuda = new QPushButton(centralWidget);
         btnAyuda->setObjectName(QStringLiteral("btnAyuda"));
         btnAyuda->setEnabled(false);
-        btnAyuda->setGeometry(QRect(540, 360, 71, 23));
+        btnAyuda->setGeometry(QRect(540, 300, 71, 23));
         btnAyuda->setAcceptDrops(false);
+        btnAyuda->setStyleSheet(QStringLiteral(""));
         lcdNumber = new QLCDNumber(centralWidget);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        lcdNumber->setGeometry(QRect(550, 10, 141, 41));
+        lcdNumber->setGeometry(QRect(540, 20, 171, 41));
         lcdNumber->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         lcdNumber->setDigitCount(9);
         btnFinalizar = new QPushButton(centralWidget);
         btnFinalizar->setObjectName(QStringLiteral("btnFinalizar"));
         btnFinalizar->setEnabled(false);
-        btnFinalizar->setGeometry(QRect(630, 360, 75, 23));
+        btnFinalizar->setGeometry(QRect(630, 300, 75, 23));
+        widget = new QWidget(centralWidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(550, 80, 161, 21));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        lblDificultad = new QLabel(widget);
+        lblDificultad->setObjectName(QStringLiteral("lblDificultad"));
+
+        horizontalLayout->addWidget(lblDificultad);
+
+        cboDificultad = new QComboBox(widget);
+        cboDificultad->setObjectName(QStringLiteral("cboDificultad"));
+        cboDificultad->setStyleSheet(QStringLiteral("color: qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 147), stop:0.497326 rgba(0, 0, 0, 147), stop:1 rgba(0, 169, 255, 147));"));
+
+        horizontalLayout->addWidget(cboDificultad);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 723, 21));
         menuMenu = new QMenu(menuBar);
         menuMenu->setObjectName(QStringLiteral("menuMenu"));
+        menuAyuda = new QMenu(menuBar);
+        menuAyuda->setObjectName(QStringLiteral("menuAyuda"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -222,10 +259,14 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuMenu->menuAction());
+        menuBar->addAction(menuAyuda->menuAction());
         menuMenu->addAction(actionNueva_partida);
         menuMenu->addAction(actionGuardar_partida);
         menuMenu->addAction(actionCargar_partida);
         menuMenu->addAction(actionSalir);
+        menuAyuda->addAction(actionAyuda);
+        menuAyuda->addSeparator();
+        menuAyuda->addAction(actionAcerca_de);
 
         retranslateUi(MainWindow);
 
@@ -234,11 +275,13 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Sudoku", 0));
         actionNueva_partida->setText(QApplication::translate("MainWindow", "Nueva partida", 0));
         actionGuardar_partida->setText(QApplication::translate("MainWindow", "Guardar partida", 0));
         actionCargar_partida->setText(QApplication::translate("MainWindow", "Cargar partida", 0));
         actionSalir->setText(QApplication::translate("MainWindow", "Salir", 0));
+        actionAyuda->setText(QApplication::translate("MainWindow", "Ayuda", 0));
+        actionAcerca_de->setText(QApplication::translate("MainWindow", "Acerca de", 0));
         gbOpciones->setTitle(QApplication::translate("MainWindow", "Opciones", 0));
         chkAlerta1->setText(QApplication::translate("MainWindow", "Alerta jugadas invalidas", 0));
         chkAlerta2->setText(QApplication::translate("MainWindow", "Alerta jugadas incorrectas", 0));
@@ -248,7 +291,15 @@ public:
         gbNumeros->setTitle(QApplication::translate("MainWindow", "Numeros", 0));
         btnAyuda->setText(QApplication::translate("MainWindow", "Ayuda", 0));
         btnFinalizar->setText(QApplication::translate("MainWindow", "Finalizar", 0));
+        lblDificultad->setText(QApplication::translate("MainWindow", "Dificultad", 0));
+        cboDificultad->clear();
+        cboDificultad->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "1 Facil", 0)
+         << QApplication::translate("MainWindow", "2 Intermedio", 0)
+         << QApplication::translate("MainWindow", "3 Dificil", 0)
+        );
         menuMenu->setTitle(QApplication::translate("MainWindow", "Menu", 0));
+        menuAyuda->setTitle(QApplication::translate("MainWindow", "Ayuda", 0));
     } // retranslateUi
 
 };

@@ -10,7 +10,7 @@ Numero::~Numero()
 
 Numero::Numero(int valor, int fila, int columna, bool visible){
     QFont font;
-    font.setPointSize(14);
+    font.setPointSize(16);
 
     this->fila = fila;
     this->columna = columna;
@@ -63,9 +63,11 @@ void Numero::cambiarColorBotonOriginal(){
     if (cuadricula-div*2){
         //boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
         this->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+        //this->setStyleSheet(QStringLiteral("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.670455, radius:0.622, fx:0.5, fy:0.671, stop:0.232955 rgba(0, 0, 127, 255), stop:1 rgba(0, 170, 255, 255));"));
     }else{
         //boton->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
         this->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
+        //this->setStyleSheet(QStringLiteral("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.670455, radius:0.622, fx:0.5, fy:0.671, stop:0.221591 rgba(0, 170, 255, 255), stop:1 rgba(0, 0, 127, 255));"));
     }
 }
 
