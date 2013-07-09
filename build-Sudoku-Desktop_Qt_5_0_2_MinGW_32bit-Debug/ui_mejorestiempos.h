@@ -33,17 +33,23 @@ public:
     QTableWidget *tableIntermedio;
     QWidget *tabAvanzado;
     QTableWidget *tableAvanzado;
-    QPushButton *btnSalir;
     QLabel *labelMejoresTiempos;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *MejoresTiempos)
     {
         if (MejoresTiempos->objectName().isEmpty())
             MejoresTiempos->setObjectName(QStringLiteral("MejoresTiempos"));
-        MejoresTiempos->resize(312, 356);
+        MejoresTiempos->resize(346, 364);
         tab = new QTabWidget(MejoresTiempos);
         tab->setObjectName(QStringLiteral("tab"));
-        tab->setGeometry(QRect(30, 60, 251, 231));
+        tab->setGeometry(QRect(40, 60, 261, 231));
+        QFont font;
+        font.setFamily(QStringLiteral("Broadway"));
+        font.setPointSize(10);
+        font.setBold(true);
+        font.setWeight(75);
+        tab->setFont(font);
         tabPrincipiante = new QWidget();
         tabPrincipiante->setObjectName(QStringLiteral("tabPrincipiante"));
         tablePrincipiante = new QTableWidget(tabPrincipiante);
@@ -66,7 +72,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
         tablePrincipiante->setVerticalHeaderItem(4, __qtablewidgetitem6);
         tablePrincipiante->setObjectName(QStringLiteral("tablePrincipiante"));
-        tablePrincipiante->setGeometry(QRect(10, 10, 221, 181));
+        tablePrincipiante->setGeometry(QRect(20, 10, 221, 181));
         tablePrincipiante->setAutoScroll(false);
         tab->addTab(tabPrincipiante, QString());
         tabIntermedio = new QWidget();
@@ -91,7 +97,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
         tableIntermedio->setVerticalHeaderItem(4, __qtablewidgetitem13);
         tableIntermedio->setObjectName(QStringLiteral("tableIntermedio"));
-        tableIntermedio->setGeometry(QRect(10, 10, 221, 181));
+        tableIntermedio->setGeometry(QRect(20, 10, 221, 181));
         tableIntermedio->setAutoScroll(false);
         tab->addTab(tabIntermedio, QString());
         tabAvanzado = new QWidget();
@@ -116,23 +122,27 @@ public:
         QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
         tableAvanzado->setVerticalHeaderItem(4, __qtablewidgetitem20);
         tableAvanzado->setObjectName(QStringLiteral("tableAvanzado"));
-        tableAvanzado->setGeometry(QRect(10, 10, 221, 181));
+        tableAvanzado->setGeometry(QRect(20, 10, 221, 181));
         tableAvanzado->setAutoScroll(false);
         tableAvanzado->setDragEnabled(false);
         tableAvanzado->setGridStyle(Qt::SolidLine);
         tableAvanzado->setSortingEnabled(false);
         tab->addTab(tabAvanzado, QString());
-        btnSalir = new QPushButton(MejoresTiempos);
-        btnSalir->setObjectName(QStringLiteral("btnSalir"));
-        btnSalir->setGeometry(QRect(120, 310, 75, 23));
         labelMejoresTiempos = new QLabel(MejoresTiempos);
         labelMejoresTiempos->setObjectName(QStringLiteral("labelMejoresTiempos"));
-        labelMejoresTiempos->setGeometry(QRect(20, 10, 281, 31));
+        labelMejoresTiempos->setGeometry(QRect(30, 10, 281, 31));
         labelMejoresTiempos->setStyleSheet(QStringLiteral("font: 75 20pt \"Broadway\";"));
+        pushButton = new QPushButton(MejoresTiempos);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(130, 310, 81, 31));
+        QFont font1;
+        font1.setFamily(QStringLiteral("Broadway"));
+        font1.setPointSize(12);
+        pushButton->setFont(font1);
 
         retranslateUi(MejoresTiempos);
 
-        tab->setCurrentIndex(2);
+        tab->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MejoresTiempos);
@@ -155,7 +165,7 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("MejoresTiempos", "4", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tablePrincipiante->verticalHeaderItem(4);
         ___qtablewidgetitem6->setText(QApplication::translate("MejoresTiempos", "5", 0));
-        tab->setTabText(tab->indexOf(tabPrincipiante), QApplication::translate("MejoresTiempos", "Principiante", 0));
+        tab->setTabText(tab->indexOf(tabPrincipiante), QApplication::translate("MejoresTiempos", "Facil", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableIntermedio->horizontalHeaderItem(0);
         ___qtablewidgetitem7->setText(QApplication::translate("MejoresTiempos", "Nombre", 0));
         QTableWidgetItem *___qtablewidgetitem8 = tableIntermedio->horizontalHeaderItem(1);
@@ -185,9 +195,9 @@ public:
         ___qtablewidgetitem19->setText(QApplication::translate("MejoresTiempos", "4", 0));
         QTableWidgetItem *___qtablewidgetitem20 = tableAvanzado->verticalHeaderItem(4);
         ___qtablewidgetitem20->setText(QApplication::translate("MejoresTiempos", "5", 0));
-        tab->setTabText(tab->indexOf(tabAvanzado), QApplication::translate("MejoresTiempos", "Avanzado", 0));
-        btnSalir->setText(QApplication::translate("MejoresTiempos", "Salir", 0));
+        tab->setTabText(tab->indexOf(tabAvanzado), QApplication::translate("MejoresTiempos", "Dificil", 0));
         labelMejoresTiempos->setText(QApplication::translate("MejoresTiempos", "MEJORES TIEMPOS", 0));
+        pushButton->setText(QApplication::translate("MejoresTiempos", "Salir", 0));
     } // retranslateUi
 
 };

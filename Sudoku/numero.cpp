@@ -10,7 +10,12 @@ Numero::~Numero()
 
 Numero::Numero(int valor, int fila, int columna, bool visible){
     QFont font;
-    font.setPointSize(16);
+    font.setFamily(QStringLiteral("Broadway"));
+    font.setPointSize(22);
+
+    QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
 
     this->fila = fila;
     this->columna = columna;
@@ -33,6 +38,8 @@ Numero::Numero(int valor, int fila, int columna, bool visible){
     this->setFrameStyle(2);
     boton->setStyleSheet(QStringLiteral ("border:none"));
     boton->setFont(font);
+    sizePolicy.setHeightForWidth(boton->sizePolicy().hasHeightForWidth());
+    boton->setSizePolicy(sizePolicy);
 
     gridNumero = new QVBoxLayout(this);
     gridNumero->setContentsMargins(0,0,0,0);
@@ -62,11 +69,13 @@ void Numero::cambiarColorBotonOriginal(){
     int div=cuadricula/2;
     if (cuadricula-div*2){
         //boton->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
-        this->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+        //this->setStyleSheet(QStringLiteral("background-color: rgb(0, 255, 0);"));
+        this->setStyleSheet(QStringLiteral("background-color: rgb(255, 205, 135);"));
         //this->setStyleSheet(QStringLiteral("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.670455, radius:0.622, fx:0.5, fy:0.671, stop:0.232955 rgba(0, 0, 127, 255), stop:1 rgba(0, 170, 255, 255));"));
     }else{
         //boton->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
-        this->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
+        //this->setStyleSheet(QStringLiteral("background-color: rgb(255, 119, 0);"));
+        this->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 127);"));
         //this->setStyleSheet(QStringLiteral("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.670455, radius:0.622, fx:0.5, fy:0.671, stop:0.221591 rgba(0, 170, 255, 255), stop:1 rgba(0, 0, 127, 255));"));
     }
 }

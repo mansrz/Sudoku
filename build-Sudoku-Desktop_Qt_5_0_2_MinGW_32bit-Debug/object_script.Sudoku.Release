@@ -1,0 +1,15 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\numero.o
+./release\generador.o
+./release\mejorestiempos.o
+./release\acercade.o
+./release\ayuda.o
+./release\simplecrypt.o
+./release\moc_mainwindow.o
+./release\moc_numero.o
+./release\moc_mejorestiempos.o
+./release\moc_acercade.o
+./release\moc_ayuda.o
+);

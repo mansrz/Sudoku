@@ -6,142 +6,52 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>723</width>
-    <height>541</height>
+    <width>789</width>
+    <height>542</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sudoku</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>501</width>
+      <x>40</x>
+      <y>20</y>
+      <width>461</width>
       <height>471</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridTablero">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
      <property name="spacing">
       <number>0</number>
      </property>
-     <item row="1" column="1">
-      <widget class="QFrame" name="frameCuad5">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 119, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QFrame" name="frameCuad4">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 255, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QFrame" name="frameCuad7">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 119, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QFrame" name="frameCuad3">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 119, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QFrame" name="frameCuad8">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 255, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QFrame" name="frameCuad6">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 255, 0);
-alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 41, 4, 255), stop:0.085 rgba(2, 79, 0, 255), stop:0.19 rgba(50, 147, 22, 255), stop:0.275 rgba(236, 191, 49, 255), stop:0.39 rgba(243, 61, 34, 255), stop:0.555 rgba(135, 81, 60, 255), stop:0.667 rgba(121, 75, 255, 255), stop:0.825 rgba(164, 255, 244, 255), stop:0.885 rgba(104, 222, 71, 255), stop:1 rgba(93, 128, 0, 255));</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QFrame" name="frameCuad9">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 119, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QFrame" name="frameCuad2">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 255, 0);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
-      <widget class="QFrame" name="frameCuad1">
+      <widget class="QLabel" name="label">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Broadway</family>
+         <pointsize>72</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 119, 0);</string>
+        <string notr="true">font: 72pt &quot;Broadway&quot;;</string>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
+       <property name="text">
+        <string>SUDOKU</string>
        </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -152,9 +62,21 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
      <rect>
       <x>540</x>
       <y>350</y>
-      <width>171</width>
-      <height>101</height>
+      <width>231</width>
+      <height>111</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Broadway</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Broadway&quot;;</string>
     </property>
     <property name="title">
      <string>Opciones</string>
@@ -164,9 +86,21 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>141</width>
+       <width>201</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Broadway</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Broadway&quot;;</string>
      </property>
      <property name="text">
       <string>Alerta jugadas invalidas</string>
@@ -177,9 +111,21 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
       <rect>
        <x>10</x>
        <y>40</y>
-       <width>151</width>
+       <width>211</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Broadway</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Broadway&quot;;</string>
      </property>
      <property name="text">
       <string>Alerta jugadas incorrectas</string>
@@ -194,6 +140,18 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
        <height>17</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Broadway</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Broadway&quot;;</string>
+     </property>
      <property name="text">
       <string>Ayuda</string>
      </property>
@@ -207,6 +165,18 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
        <height>17</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Broadway</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Broadway&quot;;</string>
+     </property>
      <property name="text">
       <string>Pista</string>
      </property>
@@ -216,31 +186,45 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>120</y>
-      <width>75</width>
-      <height>23</height>
+      <y>110</y>
+      <width>141</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <family>Broadway</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: none;</string>
+     <string notr="true">border-color: none;
+font: 16pt &quot;Broadway&quot;;</string>
     </property>
     <property name="text">
-     <string>Llenar</string>
+     <string>Iniciar</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="gbNumeros">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>590</x>
       <y>170</y>
       <width>141</width>
       <height>121</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Broadway</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Broadway&quot;;</string>
     </property>
     <property name="title">
      <string>Numeros</string>
@@ -263,11 +247,17 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
     </property>
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>550</x>
       <y>300</y>
-      <width>71</width>
-      <height>23</height>
+      <width>101</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Broadway</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="acceptDrops">
      <bool>false</bool>
@@ -282,10 +272,10 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
    <widget class="QLCDNumber" name="lcdNumber">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>20</y>
-      <width>171</width>
-      <height>41</height>
+      <x>550</x>
+      <y>10</y>
+      <width>221</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -301,11 +291,17 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
     </property>
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>670</x>
       <y>300</y>
-      <width>75</width>
-      <height>23</height>
+      <width>91</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Broadway</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Finalizar</string>
@@ -316,13 +312,21 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
      <rect>
       <x>550</x>
       <y>80</y>
-      <width>161</width>
-      <height>22</height>
+      <width>221</width>
+      <height>23</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="lblDificultad">
+       <property name="font">
+        <font>
+         <family>Broadway</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>Dificultad</string>
        </property>
@@ -330,6 +334,12 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
      </item>
      <item>
       <widget class="QComboBox" name="cboDificultad">
+       <property name="font">
+        <font>
+         <family>Broadway</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">color: qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 147), stop:0.497326 rgba(0, 0, 0, 147), stop:1 rgba(0, 169, 255, 147));</string>
        </property>
@@ -358,9 +368,15 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>723</width>
-     <height>21</height>
+     <width>789</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <widget class="QMenu" name="menuMenu">
     <property name="title">
@@ -391,40 +407,81 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
     <bool>false</bool>
    </attribute>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNueva_partida">
    <property name="text">
     <string>Nueva partida</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
   </action>
   <action name="actionGuardar_partida">
    <property name="text">
     <string>Guardar partida</string>
    </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
   </action>
   <action name="actionCargar_partida">
    <property name="text">
     <string>Cargar partida</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
   </action>
   <action name="actionSalir">
    <property name="text">
     <string>Salir</string>
    </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
   </action>
   <action name="actionAyuda">
    <property name="text">
     <string>Ayuda</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
   </action>
   <action name="actionAcerca_de">
    <property name="text">
     <string>Acerca de</string>
    </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
   </action>
   <action name="actionMejores_tiempos">
    <property name="text">
     <string>Mejores tiempos</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
   </action>
  </widget>

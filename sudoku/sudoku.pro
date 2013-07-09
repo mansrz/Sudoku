@@ -16,17 +16,25 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     numero.cpp \
     generador.cpp \
-    mejorestiempos.cpp
+    mejorestiempos.cpp \
+    acercade.cpp \
+    ayuda.cpp \
+    simplecrypt.cpp
 
 HEADERS  += mainwindow.h \
     numero.h \
     generador.h \
     Posicion.h \
     puntaje.h \
-    mejorestiempos.h
+    mejorestiempos.h \
+    acercade.h \
+    ayuda.h \
+    simplecrypt.h
 
 FORMS    += mainwindow.ui \
-    mejorestiempos.ui
+    mejorestiempos.ui \
+    acercade.ui \
+    ayuda.ui
 
 OTHER_FILES += \
     savedGame.txt

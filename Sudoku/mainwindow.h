@@ -30,6 +30,8 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <puntaje.h>
+#include <acercade.h>
+#include <ayuda.h>
 
 namespace Ui {
 class MainWindow;
@@ -174,6 +176,12 @@ private slots:
 
     void on_actionMejores_tiempos_triggered();
 
+    void on_actionNueva_partida_triggered();
+
+    void on_actionAyuda_triggered();
+
+    void on_actionAcerca_de_triggered();
+
 private:
     int casilla=-1;
     bool ayudaUsada=false;
@@ -193,6 +201,8 @@ private:
     int valorTiempo;
     Puntaje *puntajeJugador;
     MejoresTiempos *mejoresTiempos;
+    Ayuda *ayuda;
+    AcercaDe *acercaDe;
     Puntaje *listPrincipiante[5];
     Puntaje *listIntermedio[5];
     Puntaje *listAvanzado[5];

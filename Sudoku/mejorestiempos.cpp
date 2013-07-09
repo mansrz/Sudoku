@@ -1,5 +1,6 @@
 #include "mejorestiempos.h"
 #include "ui_mejorestiempos.h"
+#include <simplecrypt.h>
 
 
 MejoresTiempos::MejoresTiempos(QWidget *parent) :
@@ -28,6 +29,8 @@ void MejoresTiempos::guardarTiempos(){
     int i;
     QString text, text1;
 
+    SimpleCrypt processSimpleCrypt(89473829);
+
     QFile file_for_writing("../bestTimes.sud"); //nik: no sirvio poniendo solo savedGame.txt
     file_for_writing.open(QIODevice::Text | QIODevice::WriteOnly); //
     QTextStream text_stream_for_writing(&file_for_writing);
@@ -41,6 +44,7 @@ void MejoresTiempos::guardarTiempos(){
         text.append(",");
         text1.setNum(listPrincipiante[i]->getValor());
         text.append(text1);
+        text=processSimpleCrypt.encryptToString(text);
         text.append("\n");
         text_stream_for_writing << text;
 
@@ -52,19 +56,21 @@ void MejoresTiempos::guardarTiempos(){
         text.append(",");
         text1.setNum(listIntermedio[i]->getValor());
         text.append(text1);
+        text=processSimpleCrypt.encryptToString(text);
         text.append("\n");
         text_stream_for_writing << text;
 
         text.clear();
-        text.append("3,");
+        text.append("3");
         text.append(listAvanzado[i]->getNombre());
         text.append(",");
         text.append(listAvanzado[i]->getTiempo());
         text.append(",");
         text1.setNum(listAvanzado[i]->getValor());
         text.append(text1);
+        text=processSimpleCrypt.encryptToString(text);
         text.append("\n");
-        qDebug()<<text;
+        //qDebug()<<text;
         text_stream_for_writing << text;
         text.clear();
     }
@@ -78,6 +84,7 @@ void MejoresTiempos::guardarTiempos(){
     text.clear();
 }
 void MejoresTiempos::cargarTiempos(){
+    SimpleCrypt processSimpleCrypt(89473829);
 
     QFile file("../bestTimes.sud");
     file.open(QIODevice::Text | QIODevice::ReadOnly);
@@ -89,6 +96,7 @@ void MejoresTiempos::cargarTiempos(){
 
     while(!text_stream.atEnd()){
         linea=text_stream.readLine();
+        linea = processSimpleCrypt.decryptToString(linea);
         listaLinea = linea.split(",");
         nivel = listaLinea[0].toInt();
         Puntaje *puntaje = new Puntaje(listaLinea[0].toInt(),listaLinea[1], listaLinea [2],listaLinea[3].toInt());
@@ -117,8 +125,6 @@ void MejoresTiempos::ordenarTiempos(Puntaje *puntaje[5]){
     int i,j;
     for(i=0;i<5;i++){
         for(j=0;j<i;j++){
-            qDebug()<<puntaje[i]->getValor();
-            qDebug()<<puntaje[i]->getValor();
             if(puntaje[i]->getValor()<puntaje[j]->getValor()){
                 Puntaje *temp=puntaje[i];
                 puntaje[i]=puntaje[j];
@@ -143,7 +149,8 @@ void MejoresTiempos::cargarTiemposTabla(){
     }
 }
 
-void MejoresTiempos::on_btnSalir_clicked()
+
+void MejoresTiempos::on_pushButton_clicked()
 {
     close();
 }

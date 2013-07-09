@@ -54,7 +54,9 @@ public:
     Puntaje *listAvanzado[5];
 
 private slots:
-    void on_btnSalir_clicked();
+    //void on_btnSalir_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MejoresTiempos *ui;

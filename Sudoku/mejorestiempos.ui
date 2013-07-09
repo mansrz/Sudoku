@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>356</height>
+    <width>346</width>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,23 +16,31 @@
   <widget class="QTabWidget" name="tab">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>40</x>
      <y>60</y>
-     <width>251</width>
+     <width>261</width>
      <height>231</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabPrincipiante">
     <attribute name="title">
-     <string>Principiante</string>
+     <string>Facil</string>
     </attribute>
     <widget class="QTableWidget" name="tablePrincipiante">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>10</y>
        <width>221</width>
        <height>181</height>
@@ -85,7 +93,7 @@
     <widget class="QTableWidget" name="tableIntermedio">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>10</y>
        <width>221</width>
        <height>181</height>
@@ -133,12 +141,12 @@
    </widget>
    <widget class="QWidget" name="tabAvanzado">
     <attribute name="title">
-     <string>Avanzado</string>
+     <string>Dificil</string>
     </attribute>
     <widget class="QTableWidget" name="tableAvanzado">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>10</y>
        <width>221</width>
        <height>181</height>
@@ -194,23 +202,10 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="btnSalir">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>310</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Salir</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="labelMejoresTiempos">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>30</x>
      <y>10</y>
      <width>281</width>
      <height>31</height>
@@ -221,6 +216,25 @@
    </property>
    <property name="text">
     <string>MEJORES TIEMPOS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>310</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Broadway</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Salir</string>
    </property>
   </widget>
  </widget>

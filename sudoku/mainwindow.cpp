@@ -9,7 +9,8 @@
 #include <QTimer>
 #include <QTime>
 #include <QComboBox>
-
+#include <QCryptographicHash>
+#include <simplecrypt.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     generador=new Generador();
 
     mejoresTiempos = new MejoresTiempos(this);
+    acercaDe = new AcercaDe(this);
+    ayuda = new Ayuda(this);
 }
 
 MainWindow::~MainWindow()
@@ -255,6 +258,9 @@ void MainWindow::on_btnAyuda_clicked()
 
 void MainWindow::on_btnFinalizar_clicked()
 {
+    ui->btnLlenar->setEnabled(true);
+    ui->btnFinalizar->setEnabled(false);
+
     int i;
     timer->stop();
     for(i=0; i<81; i++){
@@ -277,8 +283,6 @@ void MainWindow::on_btnFinalizar_clicked()
 
     mejoresTiempos->show();
 
-
-    qDebug()<<"Ha ganado, guardar puntaje";
 }
 
 
@@ -293,13 +297,12 @@ void MainWindow::verificarPuntaje(){
                 temp1 = new Puntaje(1,mejoresTiempos->listPrincipiante[i]->getNombre(),mejoresTiempos->listPrincipiante[i]->getTiempo(),mejoresTiempos->listPrincipiante[i]->getValor());
                 mejoresTiempos->listPrincipiante[i]->setValores(1,nombre,textTiempo,valorTiempo);
 
-                /*for(j=1;i+j<5;j++){
+                for(j=1;i+j<5;j++){
                     temp2=new Puntaje(1,mejoresTiempos->listPrincipiante[i+j]->getNombre(),mejoresTiempos->listPrincipiante[i+j]->getTiempo(),mejoresTiempos->listPrincipiante[j+i]->getValor());
-                    mejoresTiempos->listPrincipiante[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
-                    temp1->setValores(1,mejoresTiempos->listPrincipiante[i+j]->getNombre(),mejoresTiempos->listPrincipiante[i+j]->getTiempo(),mejoresTiempos->listPrincipiante[j+i]->getValor());
-                }*/
+                    mejoresTiempos->listPrincipiante[i+j]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
+                    temp1->setValores(1,temp2->getNombre(),temp2->getTiempo(),temp2->getValor());
+                }
 
-                qDebug()<<mejoresTiempos->listPrincipiante[i]->getNombre();
                 return;
             }
         }
@@ -309,13 +312,12 @@ void MainWindow::verificarPuntaje(){
                 temp1 = new Puntaje(2,mejoresTiempos->listIntermedio[i]->getNombre(),mejoresTiempos->listIntermedio[i]->getTiempo(),mejoresTiempos->listIntermedio[i]->getValor());
                 mejoresTiempos->listIntermedio[i]->setValores(2,nombre,textTiempo,valorTiempo);
 
-                /*for(j=1;i+j<5;j++){
+                for(j=1;i+j<5;j++){
                     temp2=new Puntaje(2,mejoresTiempos->listIntermedio[i+j]->getNombre(),mejoresTiempos->listIntermedio[i+j]->getTiempo(),mejoresTiempos->listIntermedio[j+i]->getValor());
-                    mejoresTiempos->listIntermedio[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
-                    temp1->setValores(2,mejoresTiempos->listIntermedio[i+j]->getNombre(),mejoresTiempos->listIntermedio[i+j]->getTiempo(),mejoresTiempos->listIntermedio[j+i]->getValor());
-                }*/
+                    mejoresTiempos->listIntermedio[i+j]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
+                    temp1->setValores(2,temp2->getNombre(),temp2->getTiempo(),temp2->getValor());
+                }
 
-                qDebug()<<mejoresTiempos->listIntermedio[i]->getNombre();
                 return;
             }
         }
@@ -325,13 +327,11 @@ void MainWindow::verificarPuntaje(){
                 temp1 = new Puntaje(3,mejoresTiempos->listAvanzado[i]->getNombre(),mejoresTiempos->listAvanzado[i]->getTiempo(),mejoresTiempos->listAvanzado[i]->getValor());
                 mejoresTiempos->listAvanzado[i]->setValores(3,nombre,textTiempo,valorTiempo);
 
-                /*for(j=1;i+j<5;j++){
+                for(j=1;i+j<5;j++){
                     temp2=new Puntaje(3,mejoresTiempos->listAvanzado[i+j]->getNombre(),mejoresTiempos->listAvanzado[i+j]->getTiempo(),mejoresTiempos->listAvanzado[j+i]->getValor());
-                    mejoresTiempos->listAvanzado[i+j-1]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
-                    temp1->setValores(3,mejoresTiempos->listAvanzado[i+j]->getNombre(),mejoresTiempos->listAvanzado[i+j]->getTiempo(),mejoresTiempos->listAvanzado[j+i]->getValor());
-                }*/
-
-                qDebug()<<mejoresTiempos->listAvanzado[i]->getNombre();
+                    mejoresTiempos->listAvanzado[i+j]->setValores(1,temp1->getNombre(),temp1->getTiempo(),temp1->getValor());
+                    temp1->setValores(3,temp2->getNombre(),temp2->getTiempo(),temp2->getValor());
+                }
                 return;
             }
         }
@@ -351,17 +351,21 @@ void MainWindow::on_actionGuardar_partida_triggered()
     file_for_writing.open(QIODevice::Text | QIODevice::WriteOnly); //
     QTextStream text_stream_for_writing(&file_for_writing);
 
+    //Set The Encryption And Decryption Key
+    SimpleCrypt processSimpleCrypt(89473829);
+
     for (i=0;i<81;i++){
         //set the text of the file
         text.setNum(numeros[i]->getValorCorrecto());
-        text.append("\n");
+        text.append(",");
         textTemp.setNum(numeros[i]->getValor());
         text.append(textTemp);
-        text.append("\n");
+        text.append(",");
         textTemp.setNum(numeros[i]->boton->isEnabled());
         text.append(textTemp);
+        text=processSimpleCrypt.encryptToString(text);
         text.append("\n");
-        qDebug()<<text;
+
         //Write the text on the stream
         text_stream_for_writing << text;
     }
@@ -383,38 +387,31 @@ void MainWindow::on_actionSalir_triggered()
 
 void MainWindow::on_actionCargar_partida_triggered()
 {
-    /*int *arrayValorCorrect = new int[81];
-    int *arrayValor = new int[81];
-    int *arrayModificable = new int[81];*/
+    SimpleCrypt processSimpleCrypt(89473829);
 
-    int i,k,j;
-    int *valores = new int[2];
+    int i,j;
+    QString linea;
+    QStringList listaLinea;
 
     QFile file("../savedGame.sud");
     file.open(QIODevice::Text | QIODevice::ReadOnly);
     QTextStream text_stream(&file);
 
     for (i=0;i<9;i++){
-        for(j=0;j<9;j++){
-            qDebug()<<"entre for";
-            for (k=0;k<3;k++){
-                valores[k]=text_stream.readLine().toInt();
-                qDebug()<<valores[k];
-            }
-            qDebug()<<i*9+j;
-
-            creacionNumeros(i*9+j, valores[0], i, j, !valores[2]);
-            qDebug()<<"creado";
-
-
-            if (valores[1]!=-1){
-                numeros[i*9+j]->editarBoton(valores[1]);
+        for (j=0;j<9;j++){
+            linea = text_stream.readLine();
+            linea = processSimpleCrypt.decryptToString(linea);
+            listaLinea = linea.split(",");
+            creacionNumeros(i*9+j, listaLinea[0].toInt(), i, j, !listaLinea[2].toInt());
+            if (listaLinea[1].toInt()!=-1){
+                numeros[i*9+j]->editarBoton(listaLinea[1].toInt());
             }
         }
+
     }
-    qDebug()<<"sali for";
+
     connect(sgnlMprNumero, SIGNAL (mapped (int)), SLOT (obtenerCasilla(int)));
-    qDebug()<<"inicializaciones";
+
     creacionBotones();
     inicializarTimer();
 
@@ -433,4 +430,19 @@ void MainWindow::on_actionCargar_partida_triggered()
 void MainWindow::on_actionMejores_tiempos_triggered()
 {
     mejoresTiempos->show();
+}
+
+void MainWindow::on_actionNueva_partida_triggered()
+{
+    on_btnLlenar_clicked();
+}
+
+void MainWindow::on_actionAyuda_triggered()
+{
+    ayuda->show();
+}
+
+void MainWindow::on_actionAcerca_de_triggered()
+{
+    acercaDe->show();
 }
