@@ -36,7 +36,7 @@ void MejoresTiempos::guardarTiempos(){
     QTextStream text_stream_for_writing(&file_for_writing);
 
     for (i=0;i<5;i++){
-        //set the text of the file
+        //guardar de la lista
         text.append("1,");
         text.append(listPrincipiante[i]->getNombre());
         text.append(",");
@@ -73,6 +73,35 @@ void MejoresTiempos::guardarTiempos(){
         //qDebug()<<text;
         text_stream_for_writing << text;
         text.clear();
+
+        //inicializar archivo encriptado
+        /*text.append("1,n");
+        text1.setNum(i+1);
+        text.append(text1);
+        text.append(",59:59:999,2147483646");
+        text=processSimpleCrypt.encryptToString(text);
+        text.append("\n");
+        text_stream_for_writing << text;
+
+        text.clear();
+        text.append("2,n");
+        text1.setNum(i+1);
+        text.append(text1);
+        text.append(",59:59:999,2147483646");
+        text=processSimpleCrypt.encryptToString(text);
+        text.append("\n");
+        text_stream_for_writing << text;
+
+        text.clear();
+        text.append("4,n");
+        text1.setNum(i+1);
+        text.append(text1);
+        text.append(",59:59:999,2147483646");
+        text=processSimpleCrypt.encryptToString(text);
+        text.append("\n");
+        text_stream_for_writing << text;
+        text.clear();*/
+
     }
 
     file_for_writing.flush();
@@ -89,15 +118,17 @@ void MejoresTiempos::cargarTiempos(){
     QFile file("../bestTimes.sud");
     file.open(QIODevice::Text | QIODevice::ReadOnly);
     QTextStream text_stream(&file);
-    QString linea;
+    QString linea,decLinea;
     QStringList listaLinea;
     int nivel, p = 0, i=0, a=0;
 
 
     while(!text_stream.atEnd()){
         linea=text_stream.readLine();
-        linea = processSimpleCrypt.decryptToString(linea);
-        listaLinea = linea.split(",");
+        qDebug()<<linea;
+        decLinea = processSimpleCrypt.decryptToString(linea);
+        qDebug()<<decLinea;
+        listaLinea = decLinea.split(",");
         nivel = listaLinea[0].toInt();
         Puntaje *puntaje = new Puntaje(listaLinea[0].toInt(),listaLinea[1], listaLinea [2],listaLinea[3].toInt());
 
