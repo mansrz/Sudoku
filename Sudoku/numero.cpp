@@ -5,6 +5,8 @@ Numero::~Numero()
 {
     delete labelNumber;
     delete textOpciones;
+    delete boton;
+    delete this;
 }
 
 

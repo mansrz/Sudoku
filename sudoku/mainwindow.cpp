@@ -104,6 +104,7 @@ void MainWindow::on_btnLlenar_clicked()
 
     ui->btnLlenar->setEnabled(false);
     ui->btnFinalizar->setEnabled(true);
+    ui->actionGuardar_partida->setEnabled(true);
 
 }
 
@@ -267,6 +268,7 @@ void MainWindow::on_btnFinalizar_clicked()
         if (!jugadaCorrecta(i)){
             qDebug()<<"Ha perdido";
             QMessageBox::information(this,"Sudoku","Ha perdido.");
+            //borrarTablero();
             return;
         }
     }
@@ -283,8 +285,18 @@ void MainWindow::on_btnFinalizar_clicked()
 
     mejoresTiempos->show();
 
+    //borrarTablero();
 }
 
+void MainWindow::borrarTablero(){
+    int i;
+    for (i=0;i<81;i++){
+        ui->gridTablero->removeWidget(numeros[i]);
+        ui->gridTablero->addWidget(ui->label);
+        //delete (numeros[i]);
+    }
+
+}
 
 void MainWindow::verificarPuntaje(){
     int i,j=1;

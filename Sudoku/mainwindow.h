@@ -106,8 +106,15 @@ public:
     */
     void guardarTiempos();
 
+    /**
+    * verificarPuntaje Compara los puntajes y lo guarda si es un mejor puntaje
+    */
     void verificarPuntaje();
 
+    /**
+    * borrarTablero Elimina los numeros del tablero
+    */
+    void borrarTablero();
 
 private slots:
 

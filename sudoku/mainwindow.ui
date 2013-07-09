@@ -419,6 +419,9 @@ font: 16pt &quot;Broadway&quot;;</string>
    </property>
   </action>
   <action name="actionGuardar_partida">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Guardar partida</string>
    </property>
@@ -458,7 +461,7 @@ font: 16pt &quot;Broadway&quot;;</string>
    <property name="font">
     <font>
      <family>Broadway</family>
-     <pointsize>12</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
   </action>

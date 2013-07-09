@@ -27,13 +27,15 @@ El libro a continuación es creado para demostrar el proyecto realizado, Sudoku.
 En el cual se utilizara el lenguaje c++ (Orientado a objetos) para programarlo, utilizaremos la libreria "Qt" y una interfaz gráfica para el desarrollo del mismo llamado
 "Qt Creator". 
 
-
 \chapter{El Juego}
+\begin{center}
 	\includegraphics[width=0.8\textwidth]{./imagenes/PantallaPrincipal.png}
-	Sudoku es un pasatiempo que se publicó por primera vez a finales de la década de 1970 y se popularizó en Japón en 1986, dándose a 	en el ámbito internacional en 2005 cuando numerosos periódicos empezaron a publicarlo en su sección de pasatiempos. 1 El objetivo del sudoku es rellenar una cuadrícula de 9 × 9 celdas dividida en subcuadriculas de 3 × 3 (también llamadas "cajas" o "regiones") con las cifras del 1 al 9 partiendo de algunos números ya dispuestos en algunas de las celdas. 
+
+	Sudoku es un pasatiempo que se publicó por primera vez a finales de la década de 1970 y se popularizó en Japón en 1986, dándose a 	en el ámbito internacional en 2005 cuando numerosos periódicos empezaron a publicarlo en su sección de pasatiempos. 1 El objetivo del sudoku es rellenar una cuadrícula de 9 x 9 celdas dividida en subcuadriculas de 3 x 3 (también llamadas  cajas o regiones ) con las cifras del 1 al 9 partiendo de algunos números ya dispuestos en algunas de las celdas. 
 	Aunque se podrían usar colores, letras, figuras, se conviene en usar números para mayor claridad, lo que importa, es que sean nueve elementos diferenciados, que no se deben repetir en una misma fila,
 	columna o subcuadrícula. Un sudoku está bien planteado si la solución es única. La solución de un sudoku siempre es un cuadrado latino, aunque el recíproco
 	en general no es cierto ya que el sudoku establece la restricción añadida de que no se puede repetir un mismo número en una región.
+\end{center}
 
 \chapter{Historia}
 El Sudoku puede haberse ideado a partir de los trabajos del matemático suizo Leonhard Euler (1707-1783), quién utilizó los cuadrados latinos1 para realizar cálculos probabilísticos,
@@ -43,8 +45,10 @@ bajo el nombre de “Number Place”. En el año 1984 una editorial japonesa lo 
 Sus inicios reales como Sudoku en Occidente se remontan a los años 2004/2005, gracias a su publicación en los diarios “The Times” y “The Daily Mail”. Desde aquel entonces,
 el juego ha alcanzado una gran popularidad en el mundo moderno: en 2005 se publicó el primer libro acerca de Sudokus en el mundo (“Los mejores Sudokus”, con 200 tableros agrupados en 4 niveles de dificultad)
 y se lo incluyó entre los 9 problemas del ICPC (sigla de International Collegiate Programming Contest). 
+
 \chapter{Aplicación}
 	\includegraphics[width=0.8\textwidth]{./imagenes/PantallaPrincipal.png}
+\begin{center}
 	Nuestra aplicación tiene una ventana principal donde podemos apreciar un menu bar con dos opciones:
 		\begin{itemize}
 			\item Menu 
@@ -53,8 +57,10 @@ y se lo incluyó entre los 9 problemas del ICPC (sigla de International Collegia
 			Nos da las opciones de Ayuda para el programa y y un acerca de.
 			\end {itemize}
 	Tenemos en el panel izquierdo:
-	\includegraphics[width=0.8\textwidth]{./imagenes/Panel_izquierdo.png}
+
+	\includegraphics[width=0.4\textwidth]{./imagenes/Panel_izquierdo.png}
 		\begin{itemize}
+
 			\item LCD
 			Widget LCD para mostrar el tiempo. 
 			\item ComboBox
@@ -70,15 +76,23 @@ y se lo incluyó entre los 9 problemas del ICPC (sigla de International Collegia
 			\end {itemize}
 	
 	Las matrices 3x3 que componen el tablero 9x9 se aprecian así:
-	\includegraphics[width=0.8\textwidth]{./imagenes/cuadr9x9.png}
+
+	\includegraphics[width=0.5\textwidth]{./imagenes/cuadr9x9.png}
+
 	La casilla hereda de QFrame con un QLineEdit y un Boton, y con el Qframe se puso fondo. 
-	\includegraphics[width=0.8\textwidth]{./imagenes/Casilla.png}
-	Una jugada Invalidad y una jugada incorrecta se muestra asi:
-	\includegraphics[width=0.8\textwidth]{./imagenes/jugada_incorrecta.png}
-	\includegraphics[width=0.8\textwidth]{./imagenes/jugada_invalida.png}
+
+	\includegraphics[width=0.2\textwidth]{./imagenes/Casilla.png}
+
+	Una jugada Invalida y una jugada incorrecta se muestra asi:
+
+	\includegraphics[width=0.5\textwidth]{./imagenes/jugada_incorrecta.png}
+	\includegraphics[width=0.5\textwidth]{./imagenes/jugada_invalida.png}
+
 	La opción pista nos da un numero random correcto, y se muestra así:
-	\includegraphics[width=0.8\textwidth]{./imagenes/pista_juego.png}  
-	
+
+	\includegraphics[width=0.5\textwidth]{./imagenes/pista_juego.png}  
+\end{center}	
+
 	
 \chapter{Funcionalidad}
 \begin{center} Generacion de tableros:\end{center}
@@ -89,12 +103,13 @@ y se lo incluyó entre los 9 problemas del ICPC (sigla de International Collegia
 	\item Se verifica si es resolvible.
 	\item Se trata de resolver por arreglos de posibildades de numeros en casillas.
 	\item Si no se puede resolver así, se utiliza la técnica del Backtracking. 
-	\includegraphics[width=0.8\textwidth]{./imagenes/Codigo_backtrcking.png}
+
+	\includegraphics[width=0.9\textwidth]{./imagenes/Codigo_backtrcking.png}
+
 	\item Utizando Backtracking se busca solucionar cambiando los numeros detras del vacio, y utilizando recursion de la misma.
-	\includegraphics[width=0.8\textwidth]{./imagenes/codigo_genrador.png}
-	jugada_incorrecta.png
-	jugada_invalida.png
-	pista_juego.png
+
+	\includegraphics[width=0.9\textwidth]{./imagenes/codigo_genrador.png}
+
 \end {itemize}
 
 \item  Dificultad.
@@ -105,35 +120,45 @@ y se lo incluyó entre los 9 problemas del ICPC (sigla de International Collegia
 	que puede estar ese numero.
 
 
-	\includegraphics[width=0.8\textwidth]{./imagenes/Codigo_dificultad.png}
+	\includegraphics[width=1.2\textwidth]{./imagenes/Codigo_dificultad.png}
 \end {itemize}
 \item  Guardar y cargar tableros cifrados .
 
-	\includegraphics[width=0.8\textwidth]{./imagenes/Codigo_archivo_guardar.png }		
+	
 \item   Jugar y finalizar juego (2).
- 	\includegraphics[width=0.8\textwidth]{./imagenes/PantallaJugando.png}
-	\includegraphics[width=0.8\textwidth]{./imagenes/Codigo_finalizar.png}
-\item   Puntaje (3).
-	\includegraphics[width=1.10\textwidth]{./imagenes/puntaje.png}
-\end{itemize}
 
+ 	\includegraphics[width=0.55\textwidth]{./imagenes/PantallaJugando.png}
+
+	\includegraphics[width=0.55\textwidth]{./imagenes/Codigo_finalizar.png}
+
+\item   Puntaje (3).
+
+	\includegraphics[width=0.55\textwidth]{./imagenes/puntaje.png}
+\end{itemize}
 \chapter{Colaboraciones}
 
 \begin {itemize}	
 
 \item Commits por integrante.
 \begin{itemize}
-\item Veronica Pozo: 18
+\item Veronica Pozo: 19
 \item Manuel Suárez: 19
-\end
-\includegraphics[width=1.10\textwidth]{./imagenes/Contribuidores_commit_linea.png}
+\end{itemize}
+
+\includegraphics[width=1.10\textwidth]{./imagenes/Contribuidores_linea.png}
+
 \item ¿En qué fechas hay picos?
 \begin{itemize}
 \item 14 de Junio
 \item 3 de Julio
-\end
+\end{itemize}
 	\includegraphics[width=1.10\textwidth]{./imagenes/Contribuidores_commit.png}
 \end{itemize}
 \chapter{Conclusiones}
-Se concluye
+El proyecto se realizo con exito logrando implementar la mayoria de caracteristicas en nuestra aplicacion que se pedian. 
+Se conocio y practico el lenguaje c++ con la libreria Qt.
+Realizamos un trabajo grupal utilizando la herramienta de versionamiento "Git", siendo esta fundamental en el proceso de creacion
+del proyecto. 
+
+
 \end{document}  
